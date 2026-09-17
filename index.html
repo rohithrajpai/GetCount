@@ -2,93 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+        content="width=device-width, initial-scale=1.0"
     >
 
-    <meta
-        name="theme-color"
-        content="#0f172a"
-    >
-
-    <meta
-        name="description"
-        content="Secure registration form"
-    >
-
-    <title>GetCount | Registration</title>
-
-
-    <!-- =========================================================
-         GOOGLE FONTS
-    ========================================================== -->
+    <meta name="theme-color" content="#0f172a">
+    <title>GetCount | Registration Details</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
         rel="stylesheet"
     >
 
-
-    <!-- =========================================================
-         STYLES
-    ========================================================== -->
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-
         :root {
-
             --background: #0f172a;
-
             --background-two: #111827;
-
             --card: rgba(255, 255, 255, 0.085);
-
             --card-border: rgba(255, 255, 255, 0.16);
-
             --text: #ffffff;
-
             --text-muted: rgba(255, 255, 255, 0.62);
-
             --gold: #d6b477;
-
             --gold-light: #efd39b;
-
-            --danger: #fca5a5;
-
             --success: #86efac;
-
         }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
 
         body {
-
             min-height: 100vh;
-
-            font-family: "DM Sans", sans-serif;
+            padding: 32px 18px;
 
             color: var(--text);
+            font-family: "DM Sans", sans-serif;
 
             background:
                 radial-gradient(
@@ -106,1681 +60,555 @@
                     var(--background),
                     var(--background-two)
                 );
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            padding: 24px;
-
-            overflow-x: hidden;
-
-            position: relative;
         }
 
-
-        /* =====================================================
-           BACKGROUND DECORATIONS
-        ====================================================== */
-
-        .background-circle {
-
-            position: fixed;
-
-            border-radius: 50%;
-
-            pointer-events: none;
-
-            z-index: 0;
-
-            filter: blur(1px);
-        }
-
-
-        .circle-one {
-
-            width: 340px;
-
-            height: 340px;
-
-            top: -170px;
-
-            right: -120px;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(214, 180, 119, 0.12),
-                    transparent 70%
-                );
-        }
-
-
-        .circle-two {
-
-            width: 300px;
-
-            height: 300px;
-
-            bottom: -150px;
-
-            left: -130px;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(96, 165, 250, 0.10),
-                    transparent 70%
-                );
-        }
-
-
-        /* =====================================================
-           MAIN CONTAINER
-        ====================================================== */
-
-        .container {
-
+        .page {
             width: 100%;
-
-            max-width: 500px;
-
-            position: relative;
-
-            z-index: 2;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
+        .header {
+            margin-bottom: 30px;
+        }
 
-        /* =====================================================
-           CARD
-        ====================================================== */
+        .small-title {
+            margin-bottom: 8px;
 
-        .card {
+            color: var(--gold-light);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
 
+        h1 {
+            margin-bottom: 10px;
+
+            font-family: "Playfair Display", serif;
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        .description {
+            max-width: 600px;
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .summary-card,
+        .details-card {
             position: relative;
-
             overflow: hidden;
 
-            width: 100%;
-
-            padding: 42px 36px 32px;
-
-            border-radius: 28px;
-
             border: 1px solid var(--card-border);
-
+            border-radius: 22px;
             background: var(--card);
 
             backdrop-filter: blur(22px);
-
             -webkit-backdrop-filter: blur(22px);
 
             box-shadow:
-                0 35px 90px rgba(0, 0, 0, 0.38),
+                0 25px 70px rgba(0, 0, 0, 0.25),
                 inset 0 1px 0 rgba(255, 255, 255, 0.08);
-
-            animation: cardAppear 0.7s ease-out;
         }
 
-
-        @keyframes cardAppear {
-
-            from {
-
-                opacity: 0;
-
-                transform:
-                    translateY(25px)
-                    scale(0.97);
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
+        .summary-card {
+            min-height: 145px;
+            padding: 24px;
         }
 
-
-        .card::before {
-
+        .summary-card::after {
             content: "";
 
             position: absolute;
+            right: -60px;
+            bottom: -80px;
 
-            width: 230px;
-
-            height: 230px;
-
-            top: -120px;
-
-            left: -100px;
+            width: 180px;
+            height: 180px;
 
             border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(214, 180, 119, 0.12),
-                    transparent 70%
-                );
-
-            pointer-events: none;
+            background: rgba(214, 180, 119, 0.08);
         }
 
-
-        .card::after {
-
-            content: "";
-
-            position: absolute;
-
-            width: 220px;
-
-            height: 220px;
-
-            bottom: -120px;
-
-            right: -100px;
-
-            border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(255, 255, 255, 0.045),
-                    transparent 70%
-                );
-
-            pointer-events: none;
-        }
-
-
-        /* =====================================================
-           HEADER
-        ====================================================== */
-
-        .header {
-
-            text-align: center;
-
+        .summary-label {
             position: relative;
+            z-index: 1;
 
-            z-index: 2;
-
-            margin-bottom: 34px;
-        }
-
-
-        .logo {
-
-            width: 68px;
-
-            height: 68px;
-
-            margin: 0 auto 20px;
-
-            border-radius: 50%;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            color: var(--gold-light);
-
-            font-size: 25px;
-
-            border: 1px solid
-                rgba(214, 180, 119, 0.5);
-
-            background:
-                rgba(214, 180, 119, 0.10);
-
-            box-shadow:
-                0 12px 35px rgba(0, 0, 0, 0.18);
-
-            animation: logoFloat 3s ease-in-out infinite;
-        }
-
-
-        @keyframes logoFloat {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-4px);
-            }
-        }
-
-
-        .small-title {
-
-            color: var(--gold-light);
-
-            font-size: 11px;
-
-            font-weight: 700;
-
-            letter-spacing: 3px;
-
-            text-transform: uppercase;
-
-            margin-bottom: 9px;
-        }
-
-
-        h1 {
-
-            font-family: "Playfair Display", serif;
-
-            font-size: clamp(34px, 8vw, 46px);
-
-            font-weight: 600;
-
-            line-height: 1.12;
-
-            letter-spacing: -0.5px;
-
-            margin-bottom: 12px;
-        }
-
-
-        .description {
-
-            max-width: 370px;
-
-            margin: 0 auto;
-
+            margin-bottom: 14px;
             color: var(--text-muted);
-
-            font-size: 14px;
-
-            line-height: 1.7;
-        }
-
-
-        /* =====================================================
-           FORM
-        ====================================================== */
-
-        .form {
-
-            position: relative;
-
-            z-index: 3;
-        }
-
-
-        .field {
-
-            margin-bottom: 20px;
-        }
-
-
-        label {
-
-            display: block;
-
-            color: rgba(255, 255, 255, 0.88);
-
             font-size: 13px;
-
-            font-weight: 600;
-
-            margin-bottom: 9px;
         }
 
-
-        .input-container {
-
+        .summary-value {
             position: relative;
+            z-index: 1;
+
+            color: var(--gold-light);
+            font-family: "Playfair Display", serif;
+            font-size: 40px;
+            line-height: 1;
         }
 
+        .summary-subtitle {
+            position: relative;
+            z-index: 1;
 
-        .input-icon {
-
-            position: absolute;
-
-            left: 17px;
-
-            top: 50%;
-
-            transform: translateY(-50%);
-
+            margin-top: 12px;
             color: rgba(255, 255, 255, 0.42);
-
-            font-size: 17px;
-
-            pointer-events: none;
-
-            z-index: 2;
-        }
-
-
-        input {
-
-            width: 100%;
-
-            height: 57px;
-
-            padding:
-                0
-                16px
-                0
-                48px;
-
-            border-radius: 15px;
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.15);
-
-            outline: none;
-
-            background:
-                rgba(255, 255, 255, 0.065);
-
-            color: white;
-
-            font-family: "DM Sans", sans-serif;
-
-            font-size: 15px;
-
-            transition:
-                border-color 0.2s ease,
-                background 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-
-        input::placeholder {
-
-            color:
-                rgba(255, 255, 255, 0.36);
-        }
-
-
-        input:focus {
-
-            border-color:
-                rgba(239, 211, 155, 0.72);
-
-            background:
-                rgba(255, 255, 255, 0.10);
-
-            box-shadow:
-                0 0 0 4px
-                rgba(214, 180, 119, 0.08);
-        }
-
-
-        input.invalid {
-
-            border-color:
-                rgba(248, 113, 113, 0.75);
-
-            box-shadow:
-                0 0 0 3px
-                rgba(248, 113, 113, 0.06);
-        }
-
-
-        .error {
-
-            display: none;
-
-            margin-top: 7px;
-
-            color: var(--danger);
-
             font-size: 12px;
         }
 
-
-        .error.visible {
-
-            display: block;
+        .details-card {
+            padding: 26px;
         }
 
-
-        /* =====================================================
-           SUBMIT BUTTON
-        ====================================================== */
-
-        .submit-button {
-
-            width: 100%;
-
-            height: 58px;
-
-            border: none;
-
-            border-radius: 15px;
-
-            margin-top: 5px;
-
-            cursor: pointer;
-
-            color: #17120b;
-
-            font-family: "DM Sans", sans-serif;
-
-            font-size: 15px;
-
-            font-weight: 700;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--gold-light),
-                    var(--gold)
-                );
-
-            box-shadow:
-                0 14px 32px
-                rgba(214, 180, 119, 0.20);
-
-            position: relative;
-
-            overflow: hidden;
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease,
-                opacity 0.2s ease;
-        }
-
-
-        .submit-button::before {
-
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-
-            left: -120%;
-
-            width: 70%;
-
-            height: 100%;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.32),
-                    transparent
-                );
-
-            transform: skewX(-20deg);
-
-            transition: left 0.6s ease;
-        }
-
-
-        .submit-button:hover::before {
-
-            left: 140%;
-        }
-
-
-        .submit-button:hover {
-
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 18px 40px
-                rgba(214, 180, 119, 0.27);
-        }
-
-
-        .submit-button:active {
-
-            transform: translateY(0);
-        }
-
-
-        .submit-button:disabled {
-
-            opacity: 0.7;
-
-            cursor: not-allowed;
-
-            transform: none;
-        }
-
-
-        .button-content {
-
-            position: relative;
-
-            z-index: 2;
-
-            height: 100%;
-
+        .toolbar {
             display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
 
-            align-items: center;
+        .section-title {
+            font-family: "Playfair Display", serif;
+            font-size: 28px;
+        }
 
-            justify-content: center;
-
+        .filters {
+            display: flex;
             gap: 10px;
         }
 
-
-        .spinner {
-
-            width: 18px;
-
-            height: 18px;
-
-            border-radius: 50%;
-
-            border:
-                2px solid
-                rgba(23, 18, 11, 0.22);
-
-            border-top-color: #17120b;
-
-            display: none;
-
-            animation:
-                spin 0.7s linear infinite;
-        }
-
-
-        @keyframes spin {
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-
-        /* =====================================================
-           INFORMATION
-        ====================================================== */
-
-        .privacy-note {
-
-            text-align: center;
-
-            margin-top: 18px;
-
-            color:
-                rgba(255, 255, 255, 0.40);
-
-            font-size: 11px;
-
-            line-height: 1.6;
-        }
-
-
-        .footer {
-
-            text-align: center;
-
-            margin-top: 20px;
-
-            color:
-                rgba(255, 255, 255, 0.30);
-
-            font-size: 10px;
-
-            letter-spacing: 0.2px;
-        }
-
-
-        /* =====================================================
-           SUCCESS SCREEN
-        ====================================================== */
-
-        .success {
-
-            display: none;
-
-            text-align: center;
-
-            position: relative;
-
-            z-index: 4;
-
-            animation:
-                successAppear 0.5s ease-out;
-        }
-
-
-        @keyframes successAppear {
-
-            from {
-
-                opacity: 0;
-
-                transform: scale(0.94);
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform: scale(1);
-            }
-        }
-
-
-        .success-icon {
-
-            width: 86px;
-
-            height: 86px;
-
-            margin: 0 auto 24px;
-
+        .filter-group {
             display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border-radius: 50%;
-
-            color: #17120b;
-
-            font-size: 38px;
-
-            font-weight: 700;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--gold-light),
-                    var(--gold)
-                );
-
-            box-shadow:
-                0 15px 40px
-                rgba(214, 180, 119, 0.25);
-
-            animation:
-                successPop 0.55s
-                cubic-bezier(.17,.67,.34,1.4);
+            flex-direction: column;
+            gap: 6px;
         }
 
-
-        @keyframes successPop {
-
-            0% {
-
-                transform: scale(0.3);
-
-                opacity: 0;
-            }
-
-            100% {
-
-                transform: scale(1);
-
-                opacity: 1;
-            }
+        .filter-group label {
+            color: var(--text-muted);
+            font-size: 11px;
         }
 
+        input {
+            height: 42px;
+            padding: 0 13px;
 
-        .success h2 {
-
-            font-family:
-                "Playfair Display",
-                serif;
-
-            font-size: 32px;
-
-            margin-bottom: 11px;
-        }
-
-
-        .success-message {
-
-            color:
-                rgba(255, 255, 255, 0.64);
-
-            font-size: 14px;
-
-            line-height: 1.7;
-
-            margin-bottom: 26px;
-        }
-
-
-        .another-button {
-
-            padding:
-                12px
-                22px;
-
-            border-radius: 12px;
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.17);
-
-            background:
-                rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 10px;
+            outline: none;
 
             color: white;
+            font-family: "DM Sans", sans-serif;
+            background: rgba(255, 255, 255, 0.07);
+        }
 
-            font-family:
-                "DM Sans",
-                sans-serif;
+        input:focus {
+            border-color: rgba(239, 211, 155, 0.72);
+            box-shadow: 0 0 0 3px rgba(214, 180, 119, 0.08);
+        }
 
-            font-size: 13px;
+        .table-wrapper {
+            overflow-x: auto;
+        }
 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 14px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+
+            color: var(--gold-light);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 17px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 14px;
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .person-name {
+            color: white;
             font-weight: 600;
-
-            cursor: pointer;
-
-            transition:
-                background 0.2s ease,
-                transform 0.2s ease;
         }
 
-
-        .another-button:hover {
-
-            background:
-                rgba(255, 255, 255, 0.11);
-
-            transform: translateY(-1px);
+        .date {
+            color: var(--text-muted);
+            white-space: nowrap;
         }
 
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
 
-        /* =====================================================
-           MOBILE
-        ====================================================== */
+            color: var(--success);
+            font-size: 12px;
+        }
 
-        @media (max-width: 520px) {
+        .status::before {
+            content: "";
 
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .empty-state {
+            display: none;
+            padding: 45px 20px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 24px;
+
+            color: rgba(255, 255, 255, 0.32);
+            font-size: 11px;
+            text-align: center;
+        }
+
+        @media (max-width: 760px) {
             body {
-
-                padding: 16px 12px;
-
-                align-items: center;
+                padding: 22px 12px;
             }
 
-
-            .card {
-
-                padding:
-                    34px
-                    22px
-                    27px;
-
-                border-radius: 24px;
+            .summary-grid {
+                grid-template-columns: 1fr;
             }
 
-
-            .header {
-
-                margin-bottom: 29px;
+            .toolbar {
+                align-items: stretch;
+                flex-direction: column;
             }
 
-
-            .logo {
-
-                width: 58px;
-
-                height: 58px;
-
-                font-size: 22px;
-
-                margin-bottom: 17px;
+            .filters {
+                flex-direction: column;
             }
 
-
-            h1 {
-
-                font-size: 35px;
-            }
-
-
-            .description {
-
-                font-size: 13px;
-            }
-
-
+            .filter-group,
             input {
-
-                height: 55px;
+                width: 100%;
             }
 
-
-            .submit-button {
-
-                height: 55px;
+            .details-card {
+                padding: 18px 12px;
             }
-        }
 
-
-        /* =====================================================
-           ACCESSIBILITY
-        ====================================================== */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            * {
-
-                animation-duration: 0.01ms !important;
-
-                animation-iteration-count: 1 !important;
-
-                scroll-behavior: auto !important;
-
-                transition-duration: 0.01ms !important;
+            th,
+            td {
+                padding: 14px 8px;
             }
         }
 
+        @media (max-width: 540px) {
+            .table-wrapper {
+                overflow: visible;
+            }
+
+            table,
+            thead,
+            tbody,
+            tr,
+            th,
+            td {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tbody tr {
+                margin-bottom: 14px;
+                padding: 12px;
+
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 14px;
+                background: rgba(255, 255, 255, 0.035);
+            }
+
+            td {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+
+                padding: 9px 4px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+                text-align: right;
+            }
+
+            td:last-child {
+                border-bottom: none;
+            }
+
+            td::before {
+                color: var(--gold-light);
+                content: attr(data-label);
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.5px;
+                text-align: left;
+                text-transform: uppercase;
+            }
+        }
     </style>
-
 </head>
 
-
 <body>
-
-
-    <!-- Background decoration -->
-
-    <div class="background-circle circle-one"></div>
-
-    <div class="background-circle circle-two"></div>
-
-
-    <!-- =========================================================
-         MAIN
-    ========================================================== -->
-
-    <main class="container">
-
-
-        <section class="card">
-
-
-            <!-- =================================================
-                 FORM SECTION
-            ================================================== -->
-
-            <div id="formSection">
-
-
-                <header class="header">
-
-
-                    <div class="logo">
-                        ✦
-                    </div>
-
-
-                    <div class="small-title">
-                        Welcome
-                    </div>
-
-
-                    <h1>
-                        Registration
-                    </h1>
-
-
-                    <p class="description">
-                        Please enter your details below to complete
-                        your registration.
-                    </p>
-
-
-                </header>
-
-
-                <!-- =================================================
-                     REGISTRATION FORM
-                ================================================== -->
-
-                <form
-                    id="registrationForm"
-                    class="form"
-                    novalidate
-                >
-
-
-                    <!-- NAME -->
-
-                    <div class="field">
-
-
-                        <label for="name">
-                            Full Name
-                        </label>
-
-
-                        <div class="input-container">
-
-
-                            <span class="input-icon">
-                                ♙
-                            </span>
-
-
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder="Enter your full name"
-                                autocomplete="name"
-                                maxlength="100"
-                                required
-                            >
-
-
-                        </div>
-
-
-                        <div
-                            id="nameError"
-                            class="error"
-                        >
-                            Please enter your full name.
-                        </div>
-
-
-                    </div>
-
-
-
-                    <!-- MOBILE -->
-
-                    <div class="field">
-
-
-                        <label for="mobile">
-                            Mobile Number
-                        </label>
-
-
-                        <div class="input-container">
-
-
-                            <span class="input-icon">
-                                ☎
-                            </span>
-
-
-                            <input
-                                type="tel"
-                                id="mobile"
-                                name="mobile"
-                                placeholder="Enter your mobile number"
-                                autocomplete="tel"
-                                inputmode="numeric"
-                                maxlength="16"
-                                required
-                            >
-
-
-                        </div>
-
-
-                        <div
-                            id="mobileError"
-                            class="error"
-                        >
-                            Please enter a valid mobile number.
-                        </div>
-
-
-                    </div>
-
-
-
-                    <!-- SUBMIT -->
-
-                    <button
-                        type="submit"
-                        id="submitButton"
-                        class="submit-button"
-                    >
-
-
-                        <span class="button-content">
-
-
-                            <span id="buttonText">
-                                Submit Details
-                            </span>
-
-
-                            <span
-                                id="spinner"
-                                class="spinner"
-                            ></span>
-
-
-                        </span>
-
-
-                    </button>
-
-
-                    <p class="privacy-note">
-                        Your information will be securely recorded.
-                    </p>
-
-
-                </form>
-
-
-            </div>
-
-
-
-            <!-- =================================================
-                 SUCCESS SECTION
-            ================================================== -->
-
-            <div
-                id="successSection"
-                class="success"
-            >
-
-
-                <div class="success-icon">
-                    ✓
-                </div>
-
-
-                <h2>
-                    Thank You!
-                </h2>
-
-
-                <p class="success-message">
-
-                    Your details have been submitted successfully.
-
-                    <br>
-
-                    We appreciate your response.
-
-                </p>
-
-
-                <button
-                    type="button"
-                    class="another-button"
-                    id="anotherButton"
-                >
-                    Add Another Entry
-                </button>
-
-
-            </div>
-
-
+    <main class="page">
+        <header class="header">
+            <div class="small-title">GetCount Dashboard</div>
+
+            <h1>Registration Details</h1>
+
+            <p class="description">
+                View the total number of registrations, selected date,
+                and submitted participant details.
+            </p>
+        </header>
+
+        <section class="summary-grid">
+            <article class="summary-card">
+                <div class="summary-label">Total Count</div>
+                <div class="summary-value" id="totalCount">0</div>
+                <div class="summary-subtitle">All registrations</div>
+            </article>
+
+            <article class="summary-card">
+                <div class="summary-label">Selected Date</div>
+                <div class="summary-value" id="selectedDate">—</div>
+                <div class="summary-subtitle">Currently viewing</div>
+            </article>
+
+            <article class="summary-card">
+                <div class="summary-label">Today's Count</div>
+                <div class="summary-value" id="todayCount">0</div>
+                <div class="summary-subtitle">Registrations today</div>
+            </article>
         </section>
 
+        <section class="details-card">
+            <div class="toolbar">
+                <h2 class="section-title">Submitted Details</h2>
+
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="dateFilter">Filter by date</label>
+                        <input type="date" id="dateFilter">
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="searchInput">Search</label>
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="Name or mobile"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>Name</th>
+                            <th>Mobile Number</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="detailsBody"></tbody>
+                </table>
+
+                <div class="empty-state" id="emptyState">
+                    No registration details found.
+                </div>
+            </div>
+        </section>
 
         <footer class="footer">
-
-            GetCount · Registration
-
+            GetCount · Registration Details
         </footer>
-
-
     </main>
 
-
-
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================== -->
-
     <script>
+        /*
+         * Replace this sample data with data from your backend.
+         *
+         * Expected format:
+         *
+         * {
+         *     name: "Rohith Raj",
+         *     mobile: "+91 9876543210",
+         *     date: "2026-09-17",
+         *     time: "10:30 AM"
+         * }
+         */
 
-
-        /* =========================================================
-           BACKEND API URL
-
-           IMPORTANT:
-
-           After we create your backend, replace:
-
-           YOUR_BACKEND_API_URL_HERE
-
-           with the actual API URL.
-
-           Example:
-
-           const API_URL =
-             "https://example.com/api/register";
-
-        ========================================================== */
-
-
-        const API_URL =
-            "YOUR_BACKEND_API_URL_HERE";
-
-
-
-        /* =========================================================
-           ELEMENTS
-        ========================================================== */
-
-        const form =
-            document.getElementById(
-                "registrationForm"
-            );
-
-
-        const nameInput =
-            document.getElementById(
-                "name"
-            );
-
-
-        const mobileInput =
-            document.getElementById(
-                "mobile"
-            );
-
-
-        const nameError =
-            document.getElementById(
-                "nameError"
-            );
-
-
-        const mobileError =
-            document.getElementById(
-                "mobileError"
-            );
-
-
-        const submitButton =
-            document.getElementById(
-                "submitButton"
-            );
-
-
-        const buttonText =
-            document.getElementById(
-                "buttonText"
-            );
-
-
-        const spinner =
-            document.getElementById(
-                "spinner"
-            );
-
-
-        const formSection =
-            document.getElementById(
-                "formSection"
-            );
-
-
-        const successSection =
-            document.getElementById(
-                "successSection"
-            );
-
-
-        const anotherButton =
-            document.getElementById(
-                "anotherButton"
-            );
-
-
-
-        /* =========================================================
-           NAME INPUT
-        ========================================================== */
-
-        nameInput.addEventListener(
-            "input",
-            function () {
-
-
-                /*
-                   Remove excessive spaces.
-                */
-
-                this.value =
-                    this.value.replace(
-                        /\s{2,}/g,
-                        " "
-                    );
-
-
-                /*
-                   Remove error once user starts
-                   entering valid information.
-                */
-
-                if (
-                    this.value.trim().length >= 2
-                ) {
-
-                    nameError.classList.remove(
-                        "visible"
-                    );
-
-                    nameInput.classList.remove(
-                        "invalid"
-                    );
-                }
-
+        const registrations = [
+            {
+                name: "Rohith Raj",
+                mobile: "+91 9876543210",
+                date: "2026-09-17",
+                time: "10:30 AM"
+            },
+            {
+                name: "Ananya Sharma",
+                mobile: "+91 9876543211",
+                date: "2026-09-17",
+                time: "11:15 AM"
+            },
+            {
+                name: "Arjun Kumar",
+                mobile: "+91 9876543212",
+                date: "2026-09-16",
+                time: "04:45 PM"
+            },
+            {
+                name: "Meera Nair",
+                mobile: "+91 9876543213",
+                date: "2026-09-15",
+                time: "09:20 AM"
             }
-        );
+        ];
 
+        const totalCount = document.getElementById("totalCount");
+        const todayCount = document.getElementById("todayCount");
+        const selectedDate = document.getElementById("selectedDate");
+        const detailsBody = document.getElementById("detailsBody");
+        const emptyState = document.getElementById("emptyState");
+        const dateFilter = document.getElementById("dateFilter");
+        const searchInput = document.getElementById("searchInput");
 
+        function getTodayDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, "0");
+            const day = String(today.getDate()).padStart(2, "0");
 
-        /* =========================================================
-           MOBILE INPUT
-        ========================================================== */
-
-        mobileInput.addEventListener(
-            "input",
-            function () {
-
-
-                /*
-                   Allow numbers, spaces,
-                   + and hyphens.
-                */
-
-                this.value =
-                    this.value.replace(
-                        /[^\d+\-\s]/g,
-                        ""
-                    );
-
-
-                if (
-                    this.value.trim().length > 0
-                ) {
-
-                    mobileError.classList.remove(
-                        "visible"
-                    );
-
-                    mobileInput.classList.remove(
-                        "invalid"
-                    );
-                }
-
-            }
-        );
-
-
-
-        /* =========================================================
-           VALIDATE NAME
-        ========================================================== */
-
-        function validateName() {
-
-
-            const name =
-                nameInput.value.trim();
-
-
-            if (
-                name.length < 2
-            ) {
-
-                nameError.textContent =
-                    "Please enter your full name.";
-
-
-                nameError.classList.add(
-                    "visible"
-                );
-
-
-                nameInput.classList.add(
-                    "invalid"
-                );
-
-
-                return false;
-            }
-
-
-            nameError.classList.remove(
-                "visible"
-            );
-
-
-            nameInput.classList.remove(
-                "invalid"
-            );
-
-
-            return true;
+            return `${year}-${month}-${day}`;
         }
 
-
-
-        /* =========================================================
-           VALIDATE MOBILE
-        ========================================================== */
-
-        function validateMobile() {
-
-
-            const mobile =
-                mobileInput.value.trim();
-
-
-            const digits =
-                mobile.replace(
-                    /\D/g,
-                    ""
-                );
-
-
-            /*
-               Supports 10 to 15 digits.
-
-               Examples:
-
-               9876543210
-               +919876543210
-               98765 43210
-            */
-
-            if (
-                digits.length < 10 ||
-                digits.length > 15
-            ) {
-
-
-                mobileError.textContent =
-                    "Please enter a valid mobile number.";
-
-
-                mobileError.classList.add(
-                    "visible"
-                );
-
-
-                mobileInput.classList.add(
-                    "invalid"
-                );
-
-
-                return false;
+        function formatDate(dateString) {
+            if (!dateString) {
+                return "—";
             }
 
+            const date = new Date(`${dateString}T00:00:00`);
 
-            mobileError.classList.remove(
-                "visible"
-            );
-
-
-            mobileInput.classList.remove(
-                "invalid"
-            );
-
-
-            return true;
+            return date.toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            });
         }
 
-
-
-        /* =========================================================
-           FORM SUBMISSION
-        ========================================================== */
-
-        form.addEventListener(
-            "submit",
-            async function (event) {
-
-
-                event.preventDefault();
-
-
-                /*
-                   Validate fields.
-                */
-
-                const nameValid =
-                    validateName();
-
-
-                const mobileValid =
-                    validateMobile();
-
-
-                if (
-                    !nameValid ||
-                    !mobileValid
-                ) {
-
-
-                    if (!nameValid) {
-
-                        nameInput.focus();
-
-                    } else {
-
-                        mobileInput.focus();
-
-                    }
-
-
-                    return;
-                }
-
-
-
-                /*
-                   Backend configuration check.
-                */
-
-                if (
-                    API_URL ===
-                    "YOUR_BACKEND_API_URL_HERE"
-                ) {
-
-
-                    alert(
-                        "The registration page is ready, but the backend API has not been configured yet."
-                    );
-
-
-                    return;
-                }
-
-
-
-                /*
-                   Get values.
-                */
-
-                const name =
-                    nameInput.value.trim();
-
-
-                const mobile =
-                    mobileInput.value.trim();
-
-
-
-                /*
-                   Loading state.
-                */
-
-                submitButton.disabled =
-                    true;
-
-
-                buttonText.textContent =
-                    "Saving...";
-
-
-                spinner.style.display =
-                    "block";
-
-
-
-                try {
-
-
-                    /*
-                       Send data to backend.
-                    */
-
-                    const response =
-                        await fetch(
-                            API_URL,
-                            {
-
-                                method: "POST",
-
-                                headers: {
-                                    "Content-Type":
-                                        "application/json"
-                                },
-
-                                body:
-                                    JSON.stringify({
-                                        name: name,
-                                        mobile: mobile
-                                    })
-
-                            }
-                        );
-
-
-
-                    /*
-                       Check server response.
-                    */
-
-                    if (
-                        !response.ok
-                    ) {
-
-                        throw new Error(
-                            "Server returned an error."
-                        );
-                    }
-
-
-
-                    /*
-                       Clear form.
-                    */
-
-                    form.reset();
-
-
-
-                    /*
-                       Show success screen.
-                    */
-
-                    formSection.style.display =
-                        "none";
-
-
-                    successSection.style.display =
-                        "block";
-
-
-                }
-                catch (error) {
-
-
-                    console.error(
-                        "Submission error:",
-                        error
-                    );
-
-
-                    alert(
-                        "Unable to save your details right now. Please try again."
-                    );
-
-                }
-                finally {
-
-
-                    /*
-                       Restore button.
-                    */
-
-                    submitButton.disabled =
-                        false;
-
-
-                    buttonText.textContent =
-                        "Submit Details";
-
-
-                    spinner.style.display =
-                        "none";
-
-                }
-
-            }
-        );
-
-
-
-        /* =========================================================
-           ADD ANOTHER ENTRY
-        ========================================================== */
-
-        anotherButton.addEventListener(
-            "click",
-            function () {
-
-
-                successSection.style.display =
-                    "none";
-
-
-                formSection.style.display =
-                    "block";
-
-
-                /*
-                   Small delay so the browser
-                   can render the form first.
-                */
-
-                requestAnimationFrame(
-                    function () {
-
-                        nameInput.focus();
-
-                    }
-                );
-
-            }
-        );
-
-
+        function renderRegistrations() {
+            const selected = dateFilter.value;
+            const searchTerm = searchInput.value.trim().toLowerCase();
+
+            const filteredRegistrations = registrations.filter((registration) => {
+                const matchesDate =
+                    !selected || registration.date === selected;
+
+                const matchesSearch =
+                    !searchTerm ||
+                    registration.name.toLowerCase().includes(searchTerm) ||
+                    registration.mobile.toLowerCase().includes(searchTerm);
+
+                return matchesDate && matchesSearch;
+            });
+
+            detailsBody.innerHTML = "";
+
+            filteredRegistrations.forEach((registration, index) => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td data-label="Number">${index + 1}</td>
+                    <td data-label="Name">
+                        <span class="person-name">
+                            ${registration.name}
+                        </span>
+                    </td>
+                    <td data-label="Mobile">${registration.mobile}</td>
+                    <td data-label="Date" class="date">
+                        ${formatDate(registration.date)}
+                    </td>
+                    <td data-label="Time" class="date">
+                        ${registration.time}
+                    </td>
+                    <td data-label="Status">
+                        <span class="status">Recorded</span>
+                    </td>
+                `;
+
+                detailsBody.appendChild(row);
+            });
+
+            emptyState.style.display =
+                filteredRegistrations.length === 0
+                    ? "block"
+                    : "none";
+
+            totalCount.textContent = registrations.length;
+
+            const today = getTodayDate();
+
+            todayCount.textContent =
+                registrations.filter(
+                    (registration) => registration.date === today
+                ).length;
+
+            selectedDate.textContent =
+                selected
+                    ? formatDate(selected)
+                    : "All";
+        }
+
+        dateFilter.addEventListener("change", renderRegistrations);
+        searchInput.addEventListener("input", renderRegistrations);
+
+        renderRegistrations();
     </script>
-
 </body>
 </html>
