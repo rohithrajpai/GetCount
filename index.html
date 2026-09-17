@@ -239,48 +239,6 @@
             color:var(--ivory);
         }
 
-        .filters{
-            display:flex;
-            gap:12px;
-            flex-wrap:wrap;
-            align-items:end;
-        }
-
-        .filter-group{
-            display:flex;
-            flex-direction:column;
-            gap:6px;
-        }
-
-        .filter-group label{
-            color:var(--gold-soft);
-            font-size:10px;
-            text-transform:uppercase;
-            letter-spacing:1.5px;
-            font-weight:700;
-        }
-
-        input{
-            height:42px;
-            min-width:180px;
-            padding:0 14px;
-            border-radius:10px;
-            border:1px solid rgba(255,216,136,0.28);
-            background:rgba(255,249,239,0.04);
-            color:var(--ivory);
-            font-family:"Inter", sans-serif;
-            font-size:14px;
-            outline:none;
-            transition:0.2s ease;
-        }
-
-        input::placeholder{ color:rgba(255,246,234,0.45); }
-        input:focus{
-            border-color:rgba(239,216,162,0.75);
-            box-shadow:0 0 0 4px rgba(239,216,162,0.08);
-            background:rgba(255,249,239,0.07);
-        }
-
         .date-card-grid, .contact-grid, .photo-grid{
             display:grid;
             gap:18px;
@@ -473,19 +431,6 @@
                 flex-direction:column;
                 align-items:stretch;
             }
-
-            .filters{
-                width:100%;
-                flex-direction:column;
-            }
-
-            .filter-group{
-                width:100%;
-            }
-
-            input{
-                width:100%;
-            }
         }
     </style>
 </head>
@@ -497,7 +442,7 @@
             <div class="small-title">ഓം നമോ നാരായണായ</div>
             <h1>അഷ്ടാക്ഷര, ലക്ഷഗായത്രി ജപയജ്ഞം</h1>
             <p class="description">
-                ഗ്രാമദേവനായ നാരായണ ദേവരുടെ 500-ാം  പൗർണമി സത്യനാരായണ പൂജ ദിനത്തിൽ (26/09/2026) 
+                ഗ്രാമദേവനായ നാരായണ ദേവരുടെ 500-ാം  പൗർണമി സത്യനാരായണ പൂജ ദിനത്തിൽ (26/09/2026)
                 സമാരംഭം കുറിച്ച്  സത്യനാരായണ പൂജ തുടങ്ങി 41 വർഷം തികയുന്ന വൈശാഖ പൗർണമിക്ക് (06/05/2027) പരിസമാപ്തി കുറിക്കുന്നു.
             </p>
         </header>
@@ -525,18 +470,6 @@
         <section class="details-card">
             <div class="toolbar">
                 <h2 class="section-title">Important Dates Details</h2>
-
-                <!--<div class="filters">
-                    <div class="filter-group">
-                        <label for="dateFilter">Filter by date</label>
-                        <input type="date" id="dateFilter">
-                    </div>
-
-                    <div class="filter-group">
-                        <label for="searchInput">Search</label>
-                        <input type="search" id="searchInput" placeholder="Name or mobile">
-                    </div>
-                </div>-->
             </div>
 
             <div class="date-card-grid">
@@ -644,126 +577,62 @@
     </main>
 
     <script>
-        // Replace this with your Apps Script web app URL
-        const API_URL = "https://script.google.com/macros/s/AKfycbxsHSDNxG20TC_6YqAmSTK4aqFvZN3EebrbxMjkLCIxliJzZi-n9VonoSHx7sThDQokxA/exec";
+        // Replace with your final Apps Script Web App URL
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbxsHSDNxG20TC_6YqAmSTK4aqFvZN3EebrbxMjkLCIxliJzZi-n9VonoSHx7sThDQokxA/exec";
 
-        const totalCount = document.getElementById("totalCount");
-        const todayCount = document.getElementById("todayCount");
-        const selectedDate = document.getElementById("selectedDate");
-        const dateFilter = document.getElementById("dateFilter");
-        const searchInput = document.getElementById("searchInput");
-
-        let registrations = [
-            { name: "Rohith Raj", mobile: "+91 9876543210", date: "2026-09-17", time: "10:30 AM" },
-            { name: "Ananya Sharma", mobile: "+91 9876543211", date: "2026-09-17", time: "11:15 AM" },
-            { name: "Arjun Kumar", mobile: "+91 9876543212", date: "2026-09-16", time: "04:45 PM" },
-            { name: "Meera Nair", mobile: "+91 9876543213", date: "2026-09-15", time: "09:20 AM" }
-        ];
-
-        function getTodayDate() {
-            const today = new Date();
-            const year = today.getFullYear();
-            const month = String(today.getMonth() + 1).padStart(2, "0");
-            const day = String(today.getDate()).padStart(2, "0");
-            return `${year}-${month}-${day}`;
-        }
-
-        function formatDate(dateString) {
-            if (!dateString) return "—";
-            const date = new Date(`${dateString}T00:00:00`);
-            return date.toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric"
-            });
-        }
-
-        function renderRegistrations() {
-            const selected = dateFilter.value;
-            const searchTerm = searchInput.value.trim().toLowerCase();
-
-            const filtered = registrations.filter((item) => {
-                const matchesDate = !selected || item.date === selected;
-                const matchesSearch =
-                    !searchTerm ||
-                    item.name.toLowerCase().includes(searchTerm) ||
-                    item.mobile.toLowerCase().includes(searchTerm);
-
-                return matchesDate && matchesSearch;
-            });
-
-            // Since we removed the table, we can use a simple list below
-            // If you want to completely remove this section, you can ignore this function.
-            const detailsContainer = document.getElementById("detailsContainer");
-            if (detailsContainer) {
-                detailsContainer.innerHTML = "";
-                filtered.forEach((item, index) => {
-                    const card = document.createElement("div");
-                    card.innerHTML = `
-                        <div style="padding:12px 14px; border:1px solid rgba(255,216,136,0.2); border-radius:12px; background:rgba(255,255,255,0.03); margin-bottom:10px;">
-                            <strong>${index + 1}. ${item.name}</strong><br>
-                            <span style="color:rgba(255,244,226,0.75);">${item.mobile}</span><br>
-                            <span style="color:rgba(255,244,226,0.65);">${formatDate(item.date)} • ${item.time}</span>
-                        </div>
-                    `;
-                    detailsContainer.appendChild(card);
-                });
-            }
-
-            totalCount.textContent = registrations.length;
-
-            const today = getTodayDate();
-            todayCount.textContent = registrations.filter((r) => r.date === today).length;
-
-            selectedDate.textContent = selected ? formatDate(selected) : "All";
-        }
+        const totalCountElement =
+            document.getElementById("totalCount");
 
         async function loadSingleCellValue() {
-    const totalCountElement =
-        document.getElementById("totalCount");
+            totalCountElement.textContent = "Loading...";
 
-    totalCountElement.textContent = "Loading...";
+            try {
+                const response = await fetch(API_URL, {
+                    method: "GET",
+                    cache: "no-store"
+                });
 
-    try {
-        const response =
-            await fetch(API_URL);
+                const responseText = await response.text();
 
-        if (!response.ok) {
-            throw new Error("Unable to connect to Google Sheets.");
+                console.log("Apps Script Response:", responseText);
+
+                if (!response.ok) {
+                    throw new Error(
+                        `Request failed with status ${response.status}`
+                    );
+                }
+
+                const data = JSON.parse(responseText);
+
+                if (!data.success) {
+                    throw new Error(
+                        data.message || "Unable to read the value."
+                    );
+                }
+
+                const value = data.value;
+
+                totalCountElement.textContent =
+                    value === "" || value === null || typeof value === "undefined"
+                        ? "0"
+                        : value;
+
+            } catch (error) {
+                console.error("Google Sheet error:", error);
+                totalCountElement.textContent = "—";
+            }
         }
-
-        const data =
-            await response.json();
-
-        if (!data.success) {
-            throw new Error(
-                data.message || "Unable to read cell E5."
-            );
-        }
-
-        totalCountElement.textContent =
-            data.value || "0";
-
-    } catch (error) {
-        console.error(
-            "Google Sheet error:",
-            error
-        );
-
-        totalCountElement.textContent = "—";
-    }
-}
-
-        dateFilter.addEventListener("change", renderRegistrations);
-        searchInput.addEventListener("input", renderRegistrations);
 
         loadSingleCellValue();
 
-        // Photo upload preview
+        // Image upload preview
         const photoInputs = document.querySelectorAll(".photo-input");
+
         photoInputs.forEach((input) => {
             input.addEventListener("change", function () {
                 const file = this.files[0];
+
                 if (!file) return;
 
                 if (!file.type.startsWith("image/")) {
@@ -779,6 +648,7 @@
                 const placeholder = document.getElementById(placeholderId);
 
                 const imageUrl = URL.createObjectURL(file);
+
                 preview.src = imageUrl;
                 preview.style.display = "block";
                 placeholder.style.display = "none";
