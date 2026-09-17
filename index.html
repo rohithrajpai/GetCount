@@ -644,7 +644,7 @@
 
     <script>
         // Replace this with your Apps Script web app URL
-        const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
+        const API_URL = "https://script.google.com/macros/s/AKfycbxsHSDNxG20TC_6YqAmSTK4aqFvZN3EebrbxMjkLCIxliJzZi-n9VonoSHx7sThDQokxA/exec";
 
         const totalCount = document.getElementById("totalCount");
         const todayCount = document.getElementById("todayCount");
@@ -718,32 +718,40 @@
         }
 
         async function loadSingleCellValue() {
-            if (API_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL") {
-                console.log("Google Apps Script URL not set yet. Using sample data.");
-                renderRegistrations();
-                return;
-            }
+    const totalCountElement =
+        document.getElementById("totalCount");
 
-            try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
+    totalCountElement.textContent = "Loading...";
 
-                if (data && typeof data.value !== "undefined") {
-                    totalCount.textContent = data.value;
-                    registrations = registrations.map((item, index) => ({
-                        ...item,
-                        index: index + 1
-                    }));
-                    renderRegistrations();
-                } else {
-                    throw new Error("No value returned.");
-                }
-            } catch (error) {
-                console.error("Error loading Google Sheet value:", error);
-                totalCount.textContent = "—";
-                renderRegistrations();
-            }
+    try {
+        const response =
+            await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error("Unable to connect to Google Sheets.");
         }
+
+        const data =
+            await response.json();
+
+        if (!data.success) {
+            throw new Error(
+                data.message || "Unable to read cell E5."
+            );
+        }
+
+        totalCountElement.textContent =
+            data.value || "0";
+
+    } catch (error) {
+        console.error(
+            "Google Sheet error:",
+            error
+        );
+
+        totalCountElement.textContent = "—";
+    }
+}
 
         dateFilter.addEventListener("change", renderRegistrations);
         searchInput.addEventListener("input", renderRegistrations);
