@@ -1,404 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta name="theme-color" content="#0f172a">
-    <title>GetCount | Registration Details</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4b1d28" />
+    <title>GetCount | Sacred Registration</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root{
+            --bg-1: #180c10;
+            --bg-2: #2a1118;
+            --bg-3: #4c1f2d;
+            --card: rgba(255, 247, 230, 0.06);
+            --card-strong: rgba(255, 244, 220, 0.09);
+            --ivory: #fff6ea;
+            --gold: #d9b773;
+            --gold-soft: #efd8a2;
+            --saffron: #d97706;
+            --saffron-deep: #9d4600;
+            --maroon: #7a1e2d;
+            --maroon-deep: #430d18;
+            --peach: #dca07a;
+            --success: #9fe29a;
+            --muted: rgba(255, 244, 226, 0.72);
+            --border: rgba(255, 216, 136, 0.28);
         }
 
-        :root {
-            --background: #0f172a;
-            --background-two: #111827;
-            --card: rgba(255, 255, 255, 0.085);
-            --card-border: rgba(255, 255, 255, 0.16);
-            --text: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.62);
-            --gold: #d6b477;
-            --gold-light: #efd39b;
-            --success: #86efac;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
 
-        body {
-            min-height: 100vh;
-            padding: 32px 18px;
+        html{ scroll-behavior:smooth; }
 
-            color: var(--text);
-            font-family: "DM Sans", sans-serif;
-
+        body{
+            min-height:100vh;
+            padding: 28px 16px;
+            font-family:"Inter", sans-serif;
+            color: var(--ivory);
             background:
-                radial-gradient(
-                    circle at 10% 10%,
-                    rgba(214, 180, 119, 0.16),
-                    transparent 30%
-                ),
-                radial-gradient(
-                    circle at 90% 90%,
-                    rgba(59, 130, 246, 0.12),
-                    transparent 30%
-                ),
-                linear-gradient(
-                    135deg,
-                    var(--background),
-                    var(--background-two)
-                );
+                radial-gradient(circle at top left, rgba(217,119,6,0.15), transparent 26%),
+                radial-gradient(circle at bottom right, rgba(255, 208, 128, 0.12), transparent 20%),
+                linear-gradient(135deg, var(--bg-1), var(--bg-2) 35%, var(--bg-3));
+            position:relative;
+            overflow-x:hidden;
         }
 
-        .page {
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
+        body::before,
+        body::after{
+            content:"";
+            position:fixed;
+            width:480px;
+            height:480px;
+            border-radius:50%;
+            filter:blur(12px);
+            pointer-events:none;
+            z-index:0;
+            opacity:0.16;
         }
 
-        .header {
-            margin-bottom: 30px;
+        body::before{
+            top:-170px;
+            right:-130px;
+            background:radial-gradient(circle, rgba(217,183,115,0.9), transparent 62%);
         }
 
-        .small-title {
-            margin-bottom: 8px;
-
-            color: var(--gold-light);
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+        body::after{
+            bottom:-180px;
+            left:-130px;
+            background:radial-gradient(circle, rgba(217,119,6,0.75), transparent 62%);
         }
 
-        h1 {
-            margin-bottom: 10px;
-
-            font-family: "Playfair Display", serif;
-            font-size: clamp(36px, 6vw, 56px);
-            font-weight: 600;
-            line-height: 1.1;
+        .page{
+            width:100%;
+            max-width:1180px;
+            margin:0 auto;
+            position:relative;
+            z-index:2;
         }
 
-        .description {
-            max-width: 600px;
-            color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.7;
+        .header{
+            position:relative;
+            text-align:center;
+            padding:18px 0 10px;
+            margin-bottom:26px;
         }
 
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin-bottom: 24px;
+        .header::before,
+        .header::after{
+            content:"✦";
+            position:absolute;
+            top:0;
+            font-size:20px;
+            color:var(--gold-soft);
+            opacity:0.8;
+            text-shadow:0 0 16px rgba(239, 216, 162, 0.6);
+        }
+
+        .header::before{
+            left:50%;
+            transform:translateX(-120px);
+        }
+
+        .header::after{
+            right:50%;
+            transform:translateX(120px);
+        }
+
+        .logo{
+            width:72px;
+            height:72px;
+            margin:0 auto 14px;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:32px;
+            color:var(--gold-soft);
+            background:linear-gradient(135deg, rgba(239,216,162,0.15), rgba(217,119,6,0.12));
+            border:1px solid rgba(239,216,162,0.4);
+            box-shadow:0 0 30px rgba(239,216,162,0.12);
+        }
+
+        .small-title{
+            color: var(--gold-soft);
+            letter-spacing:4px;
+            font-size:11px;
+            text-transform:uppercase;
+            font-weight:700;
+            margin-bottom:8px;
+        }
+
+        h1{
+            font-family:"Cormorant Garamond", serif;
+            font-size: clamp(42px, 6vw, 66px);
+            line-height:1;
+            letter-spacing:0.5px;
+            font-weight:600;
+        }
+
+        .description{
+            max-width:720px;
+            margin:12px auto 0;
+            color:var(--muted);
+            line-height:1.8;
+            font-size:15px;
+        }
+
+        .summary-grid{
+            display:grid;
+            grid-template-columns:repeat(3, minmax(0, 1fr));
+            gap:18px;
+            margin-bottom:24px;
+            position:relative;
         }
 
         .summary-card,
-        .details-card {
-            position: relative;
-            overflow: hidden;
-
-            border: 1px solid var(--card-border);
-            border-radius: 22px;
-            background: var(--card);
-
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
-
+        .details-card{
+            position:relative;
+            overflow:hidden;
+            background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+            border:1px solid var(--border);
+            border-radius:22px;
             box-shadow:
-                0 25px 70px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+                0 28px 60px rgba(0,0,0,0.22),
+                inset 0 1px 0 rgba(255,255,255,0.06);
         }
 
-        .summary-card {
-            min-height: 145px;
-            padding: 24px;
+        .summary-card{
+            min-height:150px;
+            padding:22px 22px 18px;
         }
 
-        .summary-card::after {
-            content: "";
-
-            position: absolute;
-            right: -60px;
-            bottom: -80px;
-
-            width: 180px;
-            height: 180px;
-
-            border-radius: 50%;
-            background: rgba(214, 180, 119, 0.08);
+        .summary-card::before{
+            content:"";
+            position:absolute;
+            width:130px;
+            height:130px;
+            right:-30px;
+            bottom:-30px;
+            border-radius:50%;
+            background:radial-gradient(circle, rgba(239,216,162,0.12), transparent 65%);
         }
 
-        .summary-label {
-            position: relative;
-            z-index: 1;
-
-            margin-bottom: 14px;
-            color: var(--text-muted);
-            font-size: 13px;
+        .summary-card::after{
+            content:"";
+            position:absolute;
+            left:18px;
+            top:16px;
+            width:14px;
+            height:14px;
+            border-radius:50%;
+            background:linear-gradient(135deg, var(--gold-soft), var(--saffron));
+            box-shadow:0 0 18px rgba(239,216,162,0.4);
         }
 
-        .summary-value {
-            position: relative;
-            z-index: 1;
-
-            color: var(--gold-light);
-            font-family: "Playfair Display", serif;
-            font-size: 40px;
-            line-height: 1;
+        .summary-label{
+            position:relative;
+            z-index:1;
+            color:var(--gold-soft);
+            font-size:11px;
+            text-transform:uppercase;
+            letter-spacing:2px;
+            margin-bottom:16px;
         }
 
-        .summary-subtitle {
-            position: relative;
-            z-index: 1;
-
-            margin-top: 12px;
-            color: rgba(255, 255, 255, 0.42);
-            font-size: 12px;
+        .summary-value{
+            position:relative;
+            z-index:1;
+            font-family:"Cormorant Garamond", serif;
+            font-size:clamp(36px,4vw,52px);
+            line-height:1;
+            font-weight:600;
+            color:var(--ivory);
         }
 
-        .details-card {
-            padding: 26px;
+        .summary-subtitle{
+            position:relative;
+            z-index:1;
+            margin-top:12px;
+            color:rgba(255,246,234,0.6);
+            font-size:12px;
         }
 
-        .toolbar {
-            display: flex;
-            align-items: end;
-            justify-content: space-between;
-            gap: 18px;
-            margin-bottom: 22px;
+        .details-card{
+            padding:24px 22px 14px;
         }
 
-        .section-title {
-            font-family: "Playfair Display", serif;
-            font-size: 28px;
+        .details-card::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:
+                radial-gradient(circle at 10% 0%, rgba(217,183,115,0.08), transparent 25%),
+                radial-gradient(circle at 90% 100%, rgba(217,119,6,0.06), transparent 18%);
+            pointer-events:none;
         }
 
-        .filters {
-            display: flex;
-            gap: 10px;
+        .toolbar{
+            position:relative;
+            display:flex;
+            align-items:flex-end;
+            justify-content:space-between;
+            gap:18px;
+            padding-bottom:16px;
+            border-bottom:1px solid rgba(255,216,136,0.16);
+            margin-bottom:14px;
         }
 
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+        .section-title{
+            font-family:"Cormorant Garamond", serif;
+            font-size:clamp(30px,3vw,42px);
+            font-weight:600;
+            color:var(--ivory);
         }
 
-        .filter-group label {
-            color: var(--text-muted);
-            font-size: 11px;
+        .filters{
+            display:flex;
+            gap:12px;
+            flex-wrap:wrap;
+            align-items:end;
         }
 
-        input {
-            height: 42px;
-            padding: 0 13px;
-
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            border-radius: 10px;
-            outline: none;
-
-            color: white;
-            font-family: "DM Sans", sans-serif;
-            background: rgba(255, 255, 255, 0.07);
+        .filter-group{
+            display:flex;
+            flex-direction:column;
+            gap:6px;
         }
 
-        input:focus {
-            border-color: rgba(239, 211, 155, 0.72);
-            box-shadow: 0 0 0 3px rgba(214, 180, 119, 0.08);
+        .filter-group label{
+            color:var(--gold-soft);
+            font-size:10px;
+            text-transform:uppercase;
+            letter-spacing:1.5px;
+            font-weight:700;
         }
 
-        .table-wrapper {
-            overflow-x: auto;
+        input{
+            height:42px;
+            min-width:180px;
+            padding:0 14px;
+            border-radius:10px;
+            border:1px solid rgba(255,216,136,0.28);
+            background:rgba(255,249,239,0.04);
+            color:var(--ivory);
+            font-family:"Inter", sans-serif;
+            font-size:14px;
+            outline:none;
+            transition:0.2s ease;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        input::placeholder{
+            color:rgba(255,246,234,0.45);
         }
 
-        th {
-            padding: 14px 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-
-            color: var(--gold-light);
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-align: left;
-            text-transform: uppercase;
+        input:focus{
+            border-color:rgba(239,216,162,0.75);
+            box-shadow:0 0 0 4px rgba(239,216,162,0.08);
+            background:rgba(255,249,239,0.07);
         }
 
-        td {
-            padding: 17px 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-            color: rgba(255, 255, 255, 0.82);
-            font-size: 14px;
+        .table-wrapper{
+            overflow-x:auto;
+            position:relative;
+            z-index:1;
         }
 
-        tbody tr {
-            transition: background 0.2s ease;
+        table{
+            width:100%;
+            border-collapse:collapse;
         }
 
-        tbody tr:hover {
-            background: rgba(255, 255, 255, 0.05);
+        thead th{
+            padding:12px 12px 14px;
+            text-align:left;
+            border-bottom:1px solid rgba(255,216,136,0.12);
+            color:var(--gold-soft);
+            font-size:10px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            font-weight:700;
         }
 
-        .person-name {
-            color: white;
-            font-weight: 600;
+        tbody td{
+            padding:17px 12px;
+            border-bottom:1px solid rgba(255,255,255,0.06);
+            color:rgba(255,246,234,0.9);
+            font-size:14px;
         }
 
-        .date {
-            color: var(--text-muted);
-            white-space: nowrap;
+        tbody tr{
+            transition:background 0.2s ease;
         }
 
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-
-            color: var(--success);
-            font-size: 12px;
+        tbody tr:hover{
+            background:rgba(255,255,255,0.025);
         }
 
-        .status::before {
-            content: "";
-
-            width: 7px;
-            height: 7px;
-
-            border-radius: 50%;
-            background: var(--success);
-            box-shadow: 0 0 10px var(--success);
+        .person-name{
+            color:var(--ivory);
+            font-weight:600;
         }
 
-        .empty-state {
-            display: none;
-            padding: 45px 20px;
-            color: var(--text-muted);
-            text-align: center;
+        .date{
+            color:rgba(255,246,234,0.72);
+            white-space:nowrap;
         }
 
-        .footer {
-            margin-top: 24px;
-
-            color: rgba(255, 255, 255, 0.32);
-            font-size: 11px;
-            text-align: center;
+        .status{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            color:var(--success);
+            font-size:12px;
+            font-weight:600;
         }
 
-        @media (max-width: 760px) {
-            body {
-                padding: 22px 12px;
+        .status::before{
+            content:"";
+            width:8px;
+            height:8px;
+            border-radius:50%;
+            background:var(--success);
+            box-shadow:0 0 12px rgba(159,226,154,0.8);
+        }
+
+        .empty-state{
+            display:none;
+            text-align:center;
+            padding:30px 20px 12px;
+            color:var(--muted);
+            font-size:14px;
+        }
+
+        .footer{
+            margin-top:22px;
+            text-align:center;
+            color:rgba(255,246,234,0.38);
+            font-size:11px;
+            letter-spacing:0.2px;
+        }
+
+        @media (max-width: 760px){
+            .summary-grid{
+                grid-template-columns:1fr;
             }
 
-            .summary-grid {
-                grid-template-columns: 1fr;
+            .toolbar{
+                flex-direction:column;
+                align-items:stretch;
             }
 
-            .toolbar {
-                align-items: stretch;
-                flex-direction: column;
+            .filters{
+                width:100%;
+                flex-direction:column;
             }
 
-            .filters {
-                flex-direction: column;
+            .filter-group{
+                width:100%;
             }
 
-            .filter-group,
-            input {
-                width: 100%;
-            }
-
-            .details-card {
-                padding: 18px 12px;
-            }
-
-            th,
-            td {
-                padding: 14px 8px;
+            input{
+                width:100%;
             }
         }
 
-        @media (max-width: 540px) {
-            .table-wrapper {
-                overflow: visible;
+        @media (max-width:560px){
+            body{
+                padding:22px 12px;
             }
 
-            table,
-            thead,
-            tbody,
-            tr,
-            th,
-            td {
-                display: block;
+            .details-card{
+                padding:18px 12px 8px;
             }
 
-            thead {
-                display: none;
+            table, thead, tbody, tr, th, td{
+                display:block;
             }
 
-            tbody tr {
-                margin-bottom: 14px;
-                padding: 12px;
-
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 14px;
-                background: rgba(255, 255, 255, 0.035);
+            thead{
+                display:none;
             }
 
-            td {
-                display: flex;
-                justify-content: space-between;
-                gap: 20px;
-
-                padding: 9px 4px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-                text-align: right;
+            tbody tr{
+                margin-bottom:12px;
+                padding:8px 10px 4px;
+                border:1px solid rgba(255,216,136,0.18);
+                border-radius:12px;
+                background:rgba(255,255,255,0.02);
             }
 
-            td:last-child {
-                border-bottom: none;
+            td{
+                display:flex;
+                justify-content:space-between;
+                gap:16px;
+                padding:10px 6px;
+                border-bottom:1px solid rgba(255,255,255,0.06);
+                text-align:right;
             }
 
-            td::before {
-                color: var(--gold-light);
-                content: attr(data-label);
-                font-size: 11px;
-                font-weight: 700;
-                letter-spacing: 0.5px;
-                text-align: left;
-                text-transform: uppercase;
+            td:last-child{
+                border-bottom:none;
+            }
+
+            td::before{
+                content:attr(data-label);
+                color:var(--gold-soft);
+                font-size:10px;
+                letter-spacing:1px;
+                text-transform:uppercase;
+                font-weight:700;
+                text-align:left;
             }
         }
     </style>
 </head>
-
 <body>
     <main class="page">
         <header class="header">
-            <div class="small-title">GetCount Dashboard</div>
-
+            <div class="logo">ॐ</div>
+            <div class="small-title">Sacred Records</div>
             <h1>Registration Details</h1>
-
             <p class="description">
-                View the total number of registrations, selected date,
-                and submitted participant details.
+                View the sacred count, selected date, and all registrations with a premium devotional design inspired by temple elegance.
             </p>
         </header>
 
@@ -434,11 +503,7 @@
 
                     <div class="filter-group">
                         <label for="searchInput">Search</label>
-                        <input
-                            type="search"
-                            id="searchInput"
-                            placeholder="Name or mobile"
-                        >
+                        <input type="search" id="searchInput" placeholder="Name or mobile">
                     </div>
                 </div>
             </div>
@@ -455,60 +520,24 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-
                     <tbody id="detailsBody"></tbody>
                 </table>
 
-                <div class="empty-state" id="emptyState">
-                    No registration details found.
-                </div>
+                <div class="empty-state" id="emptyState">No registration details found.</div>
             </div>
         </section>
 
         <footer class="footer">
-            GetCount · Registration Details
+            GetCount · Sacred Registration Records
         </footer>
     </main>
 
     <script>
-        /*
-         * Replace this sample data with data from your backend.
-         *
-         * Expected format:
-         *
-         * {
-         *     name: "Rohith Raj",
-         *     mobile: "+91 9876543210",
-         *     date: "2026-09-17",
-         *     time: "10:30 AM"
-         * }
-         */
-
         const registrations = [
-            {
-                name: "Rohith Raj",
-                mobile: "+91 9876543210",
-                date: "2026-09-17",
-                time: "10:30 AM"
-            },
-            {
-                name: "Ananya Sharma",
-                mobile: "+91 9876543211",
-                date: "2026-09-17",
-                time: "11:15 AM"
-            },
-            {
-                name: "Arjun Kumar",
-                mobile: "+91 9876543212",
-                date: "2026-09-16",
-                time: "04:45 PM"
-            },
-            {
-                name: "Meera Nair",
-                mobile: "+91 9876543213",
-                date: "2026-09-15",
-                time: "09:20 AM"
-            }
+            { name:"Rohith Raj", mobile:"+91 9876543210", date:"2026-09-17", time:"10:30 AM" },
+            { name:"Ananya Sharma", mobile:"+91 9876543211", date:"2026-09-17", time:"11:15 AM" },
+            { name:"Arjun Kumar", mobile:"+91 9876543212", date:"2026-09-16", time:"04:45 PM" },
+            { name:"Meera Nair", mobile:"+91 9876543213", date:"2026-09-15", time:"09:20 AM" }
         ];
 
         const totalCount = document.getElementById("totalCount");
@@ -522,23 +551,18 @@
         function getTodayDate() {
             const today = new Date();
             const year = today.getFullYear();
-            const month = String(today.getMonth() + 1).padStart(2, "0");
-            const day = String(today.getDate()).padStart(2, "0");
-
+            const month = String(today.getMonth()+1).padStart(2,'0');
+            const day = String(today.getDate()).padStart(2,'0');
             return `${year}-${month}-${day}`;
         }
 
-        function formatDate(dateString) {
-            if (!dateString) {
-                return "—";
-            }
-
+        function formatDate(dateString){
+            if(!dateString) return "—";
             const date = new Date(`${dateString}T00:00:00`);
-
             return date.toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric"
+                day:"2-digit",
+                month:"short",
+                year:"numeric"
             });
         }
 
@@ -546,63 +570,39 @@
             const selected = dateFilter.value;
             const searchTerm = searchInput.value.trim().toLowerCase();
 
-            const filteredRegistrations = registrations.filter((registration) => {
-                const matchesDate =
-                    !selected || registration.date === selected;
-
+            const filtered = registrations.filter((item) => {
+                const matchesDate = !selected || item.date === selected;
                 const matchesSearch =
                     !searchTerm ||
-                    registration.name.toLowerCase().includes(searchTerm) ||
-                    registration.mobile.toLowerCase().includes(searchTerm);
+                    item.name.toLowerCase().includes(searchTerm) ||
+                    item.mobile.toLowerCase().includes(searchTerm);
 
                 return matchesDate && matchesSearch;
             });
 
             detailsBody.innerHTML = "";
 
-            filteredRegistrations.forEach((registration, index) => {
+            filtered.forEach((item, index) => {
                 const row = document.createElement("tr");
-
                 row.innerHTML = `
                     <td data-label="Number">${index + 1}</td>
-                    <td data-label="Name">
-                        <span class="person-name">
-                            ${registration.name}
-                        </span>
-                    </td>
-                    <td data-label="Mobile">${registration.mobile}</td>
-                    <td data-label="Date" class="date">
-                        ${formatDate(registration.date)}
-                    </td>
-                    <td data-label="Time" class="date">
-                        ${registration.time}
-                    </td>
-                    <td data-label="Status">
-                        <span class="status">Recorded</span>
-                    </td>
+                    <td data-label="Name"><span class="person-name">${item.name}</span></td>
+                    <td data-label="Mobile">${item.mobile}</td>
+                    <td data-label="Date" class="date">${formatDate(item.date)}</td>
+                    <td data-label="Time" class="date">${item.time}</td>
+                    <td data-label="Status"><span class="status">Recorded</span></td>
                 `;
-
                 detailsBody.appendChild(row);
             });
 
-            emptyState.style.display =
-                filteredRegistrations.length === 0
-                    ? "block"
-                    : "none";
+            emptyState.style.display = filtered.length === 0 ? "block" : "none";
 
             totalCount.textContent = registrations.length;
 
             const today = getTodayDate();
+            todayCount.textContent = registrations.filter((r) => r.date === today).length;
 
-            todayCount.textContent =
-                registrations.filter(
-                    (registration) => registration.date === today
-                ).length;
-
-            selectedDate.textContent =
-                selected
-                    ? formatDate(selected)
-                    : "All";
+            selectedDate.textContent = selected ? formatDate(selected) : "All";
         }
 
         dateFilter.addEventListener("change", renderRegistrations);
