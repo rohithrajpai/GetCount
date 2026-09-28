@@ -506,7 +506,7 @@
             </article>
 
             <article class="summary-card">
-                <div class="summary-label">ദിവസം</div>
+                <div class="summary-label"><span id="pdays">0</span>ദിവസം</div>
                 <div class="summary-value" id="selectedDate">Loading...</div>
                 <div class="summary-subtitle"></div>
             </article>
@@ -622,7 +622,7 @@
         "https://script.google.com/macros/s/AKfycbx4tdKW86L0raWPsjEI__fbLqsMFVQOEHfbyEsKcVfSNM4G0GfS_gCFqs9VlXqqy0tQVg/exec";
 
     const COUNT_API_URL =
-        "https://script.google.com/macros/s/AKfycbxnfNf6PP-xiR5Ag8zS02UABKym4rdAPFUPFaS_-iYNfTJ6Km1lyartrPty4qBMFTg5/exec";
+        "https://script.google.com/macros/s/AKfycby51juLi4S1cwn6VUbK_mmD2TjLeEBwklish72Bxc4l2Wy6lKLGqZ81heq6k78sfPvM/exec";
 
     const registrationElements = {
         E2: document.getElementById("totalreg1"),
@@ -631,7 +631,8 @@
 
     const countElements = {
         D2: document.getElementById("totalcount1"),
-        D3: document.getElementById("totalcount2")
+        D3: document.getElementById("totalcount2"),
+        G8: document.getElementById("pdays")
     };
 
     function displayTodayDate() {
