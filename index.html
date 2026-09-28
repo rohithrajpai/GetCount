@@ -167,30 +167,21 @@
             background:radial-gradient(circle, rgba(239,216,162,0.12), transparent 65%);
         }
 
-        .summary-card::after{
-            content:"";
-            position:absolute;
-            left:18px;
-            top:16px;
-            width:14px;
-            height:14px;
-            border-radius:50%;
-            background:linear-gradient(135deg, var(--gold-soft), var(--saffron));
-            box-shadow:0 0 18px rgba(239,216,162,0.4);
-        }
-
         .summary-label{
             position:relative;
             z-index:1;
             color:var(--gold-soft);
-            font-size:11px;
+            font-size:14px;
             text-transform:uppercase;
             letter-spacing:2px;
             margin-bottom:16px;
+            font-weight:700;
         }
 
         .summary-value{
-            position:relative;
+            position:absolute;
+            left:22px;
+            bottom:24px;
             z-index:1;
             font-family:"Cormorant Garamond", serif;
             font-size:clamp(36px,4vw,52px);
@@ -200,15 +191,71 @@
         }
 
         .summary-subtitle{
-            position:relative;
+            position:absolute;
+            right:22px;
+            bottom:18px;
             z-index:1;
-            margin-top:12px;
             color:rgba(255,246,234,0.6);
             font-size:12px;
+            text-align:right;
         }
 
         .details-card{
             padding:24px 22px 14px;
+        }
+
+        .registration-card{
+            display:grid;
+            grid-template-columns:repeat(2, minmax(0, 1fr));
+            gap:18px;
+            margin-bottom:24px;
+            padding:24px 26px;
+            border:1px solid var(--border);
+            border-radius:22px;
+            background:linear-gradient(135deg, rgba(217,183,115,0.12), rgba(255,255,255,0.035));
+            box-shadow:0 20px 45px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+
+        .registration-item{
+            min-width:0;
+            padding:16px 18px;
+            border:1px solid rgba(255,216,136,0.2);
+            border-radius:17px;
+            background:rgba(255,255,255,0.035);
+        }
+
+        .registration-title{
+            margin-bottom:7px;
+            color:var(--gold-soft);
+            font-size:16px;
+            font-weight:700;
+        }
+
+        .registration-link{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            margin-top:4px;
+            padding:10px 15px;
+            border:1px solid rgba(240,215,158,0.45);
+            border-radius:10px;
+            color:#24100f;
+            background:var(--gold-soft);
+            font-size:12px;
+            font-weight:700;
+            text-decoration:none;
+            transition:0.2s ease;
+        }
+
+        .registration-link:hover{
+            background:var(--ivory);
+        }
+
+        .finger-icon{
+            width:16px;
+            height:16px;
+            fill:currentColor;
+            flex-shrink:0;
         }
 
         .details-card::before{
@@ -431,6 +478,10 @@
                 flex-direction:column;
                 align-items:stretch;
             }
+
+            .registration-card{
+                grid-template-columns:1fr;
+            }
         }
     </style>
 </head>
@@ -439,64 +490,85 @@
 
         <header class="header">
             <div class="logo">ॐ</div>
-            <div class="small-title">ഓം നമോ നാരായണായ</div>
+            <div class="small">ഓം നമോ നാരായണായ</div>
             <h1>അഷ്ടാക്ഷര, ലക്ഷഗായത്രി ജപയജ്ഞം</h1>
             <p class="description">
-                ഗ്രാമദേവനായ നാരായണ ദേവരുടെ 500-ാം  പൗർണമി സത്യനാരായണ പൂജ ദിനത്തിൽ (26/09/2026)
-                സമാരംഭം കുറിച്ച്  സത്യനാരായണ പൂജ തുടങ്ങി 41 വർഷം തികയുന്ന വൈശാഖ പൗർണമിക്ക് (06/05/2027) പരിസമാപ്തി കുറിക്കുന്നു.
+                ഗ്രാമദേവനായ നാരായണ ദേവരുടെ 500-ാം  പൗർണ്ണമി സത്യനാരായണ പൂജ ദിനത്തിൽ (26/09/2026)
+                സമാരംഭം കുറിച്ച്  സത്യനാരായണ പൂജ തുടങ്ങി 41 വർഷം തികയുന്ന വൈശാഖ പൗർണ്ണമിക്ക് (06/05/2027) പരിസമാപ്തി കുറിക്കുന്നു.
             </p>
         </header>
 
         <section class="summary-grid">
             <article class="summary-card">
                 <div class="summary-label">ഗായത്രി ജപം</div>
-                <div class="summary-value" id="totalCount">0</div>
-                <div class="summary-subtitle">(Person Count)</div>
+                <div class="summary-value" id="totalcount1">0</div>
+                <div class="summary-subtitle"><span id="totalreg1">0</span> Devotees</div>
             </article>
 
             <article class="summary-card">
-                <div class="summary-label">Date</div>
-                <div class="summary-value" id="selectedDate">—</div>
-                <div class="summary-subtitle">Start Date</div>
+                <div class="summary-label">ദിവസം</div>
+                <div class="summary-value" id="selectedDate">Loading...</div>
+                <div class="summary-subtitle"></div>
             </article>
 
             <article class="summary-card">
                 <div class="summary-label">അഷ്ടാക്ഷര ജപം:</div>
-                <div class="summary-value" id="todayCount">0</div>
-                <div class="summary-subtitle">(Person Count)</div>
+                <div class="summary-value" id="totalcount2">0</div>
+                <div class="summary-subtitle"><span id="totalreg2">0</span> Devotees</div>
             </article>
+        </section>
+
+        <section class="registration-card" aria-labelledby="registration-title">
+            <div class="registration-item">
+                <div class="registration-title" id="registration-title">Registration Link</div>
+                <a class="registration-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfYY3Bk5MUa0qdVtESkToaimTSfJ5qihVky0floj4zcoctdIA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">
+                    <svg class="finger-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M8.5 11V5.5a1.5 1.5 0 0 1 3 0V11h1V3.5a1.5 1.5 0 0 1 3 0V11h1V6.5a1.5 1.5 0 0 1 3 0v7.75c0 3.73-2.77 6.75-6.5 6.75h-.5c-2.76 0-4.98-1.58-6.04-3.78L4.1 13.9a1.5 1.5 0 0 1 2.7-1.3L8.5 15V11Z"/>
+                    </svg>
+                    Click Here
+                </a>
+            </div>
+            <div class="registration-item">
+                <div class="registration-title">Submit Count</div>
+                <a class="registration-link" href="https://docs.google.com/forms/d/e/1FAIpQLSeRgGfkWG2eNlc6cGO2xu7ysh_8dMLtjiFNoWAcjsb8qIxktw/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">
+                    <svg class="finger-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M8.5 11V5.5a1.5 1.5 0 0 1 3 0V11h1V3.5a1.5 1.5 0 0 1 3 0V11h1V6.5a1.5 1.5 0 0 1 3 0v7.75c0 3.73-2.77 6.75-6.5 6.75h-.5c-2.76 0-4.98-1.58-6.04-3.78L4.1 13.9a1.5 1.5 0 0 1 2.7-1.3L8.5 15V11Z"/>
+                    </svg>
+                    Click Here
+                </a>
+            </div>
         </section>
 
         <section class="details-card">
             <div class="toolbar">
-                <h2 class="section-title">Important Dates Details</h2>
+                <h2 class="section-title">Important Dates</h2>
             </div>
 
             <div class="date-card-grid">
                 <article class="date-card">
                     <div class="date-icon">✦</div>
-                    <div class="date-label">Registration Opens</div>
-                    <div class="date-value">01 Sep 2026</div>
+                    <div class="date-label">സത്യനാരായണ പൂജ</div>
+                    <div class="date-value">26 Sep 2026</div>
                     <div class="date-description">
-                        Registration begins for all devotees and participants.
+                        500-ാം  പൗർണ്ണമി സത്യനാരായണ പൂജ
                     </div>
                 </article>
 
                 <article class="date-card">
                     <div class="date-icon">◈</div>
-                    <div class="date-label">Main Event</div>
-                    <div class="date-value">17 Sep 2026</div>
+                    <div class="date-label">മഹാനവമി</div>
+                    <div class="date-value">20 Oct 2026</div>
                     <div class="date-description">
-                        The main spiritual event will begin at 9:00 AM.
+                        ശ്രീ സരസ്വതി പൂജ,ശമീപൂജ  
                     </div>
                 </article>
 
                 <article class="date-card">
                     <div class="date-icon">☼</div>
-                    <div class="date-label">Closing Date</div>
-                    <div class="date-value">30 Sep 2026</div>
+                    <div class="date-label">വിജയദശമി</div>
+                    <div class="date-value">21 Oct 2026</div>
                     <div class="date-description">
-                        Final day for registration and participation.
+                        കാർത്തിക വൃത തുളസി പൂജാരംഭം
                     </div>
                 </article>
             </div>
@@ -507,30 +579,29 @@
                 <article class="contact-card">
                     <div class="contact-icon">☎</div>
                     <div>
-                        <div class="contact-label">Phone</div>
+                        <div class="contact-label">Sreekath G Bhat (Melshanthi)</div>
                         <div class="contact-value">
-                            <a href="tel:+919876543210">+91 98765 43210</a>
+                            <a href="tel:+919037090910">+91 90370 90910</a>
                         </div>
                     </div>
                 </article>
 
                 <article class="contact-card">
-                    <div class="contact-icon">✉</div>
+                    <div class="contact-icon">☎</div>
                     <div>
-                        <div class="contact-label">Email</div>
+                        <div class="contact-label">Rohith Raj Pai</div>
                         <div class="contact-value">
-                            <a href="mailto:contact@example.com">contact@example.com</a>
+                            <a href="tel:+918111812762">+91 81118 12762</a>
                         </div>
                     </div>
                 </article>
 
                 <article class="contact-card">
-                    <div class="contact-icon">⌖</div>
+                    <div class="contact-icon">☎</div>
                     <div>
-                        <div class="contact-label">Location</div>
+                        <div class="contact-label">Ganesh Pai</div>
                         <div class="contact-value">
-                            Sri Temple Hall,<br>
-                            Main Road, Bengaluru
+                            <a href="tel:+919846127997">+91 98461 27997</a>
                         </div>
                     </div>
                 </article>
@@ -538,122 +609,127 @@
 
             <div style="height:26px;"></div>
 
-            <div class="photo-grid">
-                <div class="photo-frame">
-                    <img id="photoPreview1" alt="Uploaded photo 1">
-                    <div class="photo-placeholder" id="placeholder1">
-                        <div class="photo-placeholder-icon">✦</div>
-                        <span>Upload the main event photo</span>
-                    </div>
-                    <label class="upload-button" for="photoInput1">Upload Photo</label>
-                    <input class="photo-input" type="file" id="photoInput1" accept="image/*" data-preview="photoPreview1" data-placeholder="placeholder1">
-                </div>
-
-                <div class="photo-frame">
-                    <img id="photoPreview2" alt="Uploaded photo 2">
-                    <div class="photo-placeholder" id="placeholder2">
-                        <div class="photo-placeholder-icon">◈</div>
-                        <span>Upload a temple or venue photo</span>
-                    </div>
-                    <label class="upload-button" for="photoInput2">Upload Photo</label>
-                    <input class="photo-input" type="file" id="photoInput2" accept="image/*" data-preview="photoPreview2" data-placeholder="placeholder2">
-                </div>
-
-                <div class="photo-frame">
-                    <img id="photoPreview3" alt="Uploaded photo 3">
-                    <div class="photo-placeholder" id="placeholder3">
-                        <div class="photo-placeholder-icon">☼</div>
-                        <span>Upload a special memory</span>
-                    </div>
-                    <label class="upload-button" for="photoInput3">Upload Photo</label>
-                    <input class="photo-input" type="file" id="photoInput3" accept="image/*" data-preview="photoPreview3" data-placeholder="placeholder3">
-                </div>
-            </div>
+            
         </section>
 
         <footer class="footer">
-            GetCount · Sacred Registration Records
+            ॐ नमो नारायणाय
         </footer>
     </main>
 
     <script>
-        // Replace with your final Apps Script Web App URL
-        const API_URL =
-            "https://script.google.com/macros/s/AKfycbyCkXMUWgJl1C5EdDdsp_H4H3bROsngCKXy-5ZwijBpAAnxzEkXmamzFPmVHbXwcKSJDw/exec";
+    const REGISTRATION_API_URL =
+        "https://script.google.com/macros/s/AKfycbx4tdKW86L0raWPsjEI__fbLqsMFVQOEHfbyEsKcVfSNM4G0GfS_gCFqs9VlXqqy0tQVg/exec";
 
-        const totalCountElement =
-            document.getElementById("totalCount");
+    const COUNT_API_URL =
+        "https://script.google.com/macros/s/AKfycbxnfNf6PP-xiR5Ag8zS02UABKym4rdAPFUPFaS_-iYNfTJ6Km1lyartrPty4qBMFTg5/exec";
 
-        async function loadSingleCellValue() {
-            totalCountElement.textContent = "Loading...";
+    const registrationElements = {
+        E2: document.getElementById("totalreg1"),
+        E3: document.getElementById("totalreg2")
+    };
 
-            try {
-                const response = await fetch(API_URL, {
-                    method: "GET",
-                    cache: "no-store"
-                });
+    const countElements = {
+        D2: document.getElementById("totalcount1"),
+        D3: document.getElementById("totalcount2")
+    };
 
-                const responseText = await response.text();
+    function displayTodayDate() {
+        const today = new Date();
 
-                console.log("Apps Script Response:", responseText);
-
-                if (!response.ok) {
-                    throw new Error(
-                        `Request failed with status ${response.status}`
-                    );
-                }
-
-                const data = JSON.parse(responseText);
-
-                if (!data.success) {
-                    throw new Error(
-                        data.message || "Unable to read the value."
-                    );
-                }
-
-                const value = data.value;
-
-                totalCountElement.textContent =
-                    value === "" || value === null || typeof value === "undefined"
-                        ? "0"
-                        : value;
-
-            } catch (error) {
-                console.error("Google Sheet error:", error);
-                totalCountElement.textContent = "—";
-            }
-        }
-
-        loadSingleCellValue();
-
-        // Image upload preview
-        const photoInputs = document.querySelectorAll(".photo-input");
-
-        photoInputs.forEach((input) => {
-            input.addEventListener("change", function () {
-                const file = this.files[0];
-
-                if (!file) return;
-
-                if (!file.type.startsWith("image/")) {
-                    alert("Please select a valid image file.");
-                    this.value = "";
-                    return;
-                }
-
-                const previewId = this.dataset.preview;
-                const placeholderId = this.dataset.placeholder;
-
-                const preview = document.getElementById(previewId);
-                const placeholder = document.getElementById(placeholderId);
-
-                const imageUrl = URL.createObjectURL(file);
-
-                preview.src = imageUrl;
-                preview.style.display = "block";
-                placeholder.style.display = "none";
-            });
+        const formattedDate = today.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
         });
-    </script>
+
+        document.getElementById("selectedDate").textContent =
+            formattedDate;
+    }
+
+    function setLoading(elements) {
+        Object.values(elements).forEach((element) => {
+            if (element) {
+                element.textContent = "Loading...";
+            }
+        });
+    }
+
+    function setError(elements) {
+        Object.values(elements).forEach((element) => {
+            if (element) {
+                element.textContent = "—";
+            }
+        });
+    }
+
+    function displayValues(elements, values) {
+        Object.entries(elements).forEach(([cellAddress, element]) => {
+            if (!element) {
+                return;
+            }
+
+            const value = values[cellAddress];
+
+            element.textContent =
+                value === "" ||
+                value === null ||
+                typeof value === "undefined"
+                    ? "0"
+                    : value;
+        });
+    }
+
+    async function loadSheetValues(apiUrl, elements, label) {
+        setLoading(elements);
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: "GET",
+                cache: "no-store"
+            });
+
+            const responseText = await response.text();
+
+            console.log(`${label} API response:`, responseText);
+
+            if (!response.ok) {
+                throw new Error(
+                    `${label} request failed with status ${response.status}`
+                );
+            }
+
+            const data = JSON.parse(responseText);
+
+            if (!data.success) {
+                throw new Error(
+                    data.message || `Unable to read ${label} values.`
+                );
+            }
+
+            displayValues(elements, data.values || {});
+
+        } catch (error) {
+            console.error(`${label} Google Sheet error:`, error);
+            setError(elements);
+        }
+    }
+
+    displayTodayDate();
+
+    loadSheetValues(
+        REGISTRATION_API_URL,
+        registrationElements,
+        "Registration"
+    );
+
+    loadSheetValues(
+        COUNT_API_URL,
+        countElements,
+        "Count"
+    );
+
+    
+</script>
 </body>
 </html>
