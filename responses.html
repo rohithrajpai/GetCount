@@ -12,11 +12,10 @@
 
     <style>
         :root {
-            --bg-1: #180c10;
-            --bg-2: #2a1118;
-            --bg-3: #4c1f2d;
-            --card: rgba(255, 247, 230, 0.07);
-            --border: rgba(255, 216, 136, 0.28);
+            --bg: #210e14;
+            --panel: rgba(255, 247, 230, 0.07);
+            --panel-strong: rgba(0, 0, 0, 0.16);
+            --border: rgba(255, 216, 136, 0.25);
             --ivory: #fff6ea;
             --gold: #efd8a2;
             --muted: rgba(255, 244, 226, 0.72);
@@ -29,107 +28,224 @@
         body {
             min-height: 100vh;
             margin: 0;
-            padding: 30px 16px;
+            padding: 36px 18px;
             color: var(--ivory);
             font-family: "Inter", sans-serif;
             background:
-                radial-gradient(circle at top left, rgba(217,119,6,0.15), transparent 26%),
-                linear-gradient(135deg, var(--bg-1), var(--bg-2) 35%, var(--bg-3));
+                radial-gradient(ellipse at top, rgba(217, 119, 6, 0.13), transparent 38%),
+                linear-gradient(145deg, #180c10, #35151f 55%, #4c1f2d);
         }
 
         main {
-            width: 100%;
-            max-width: 1000px;
+            width: min(100%, 960px);
             margin: 0 auto;
         }
 
-        header {
-            margin: 20px 0 26px;
+        .page-header {
+            margin: 12px auto 28px;
             text-align: center;
+        }
+
+        .eyebrow {
+            margin: 0 0 8px;
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
         h1 {
             margin: 0;
             font-family: "Cormorant Garamond", serif;
-            font-size: clamp(38px, 6vw, 58px);
+            font-size: clamp(38px, 7vw, 62px);
+            line-height: 1.1;
         }
 
         .description {
-            margin: 10px auto 0;
+            max-width: 680px;
+            margin: 12px auto 0;
             color: var(--muted);
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         .card {
-            padding: 24px;
+            padding: clamp(18px, 4vw, 32px);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            background: var(--card);
-            box-shadow: 0 24px 55px rgba(0,0,0,0.2);
+            border-radius: 22px;
+            background: var(--panel);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.24);
         }
 
-        .toolbar {
+        .section-heading {
+            margin: 0 0 14px;
+            color: var(--gold);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .option-select {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin: 0 0 24px;
+            padding: 0;
+            border: 0;
+        }
+
+        .option-select legend {
+            margin-bottom: 12px;
+            color: var(--gold);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .option-choice {
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 11px;
+            min-height: 58px;
+            margin: 0;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            color: var(--ivory);
+            background: var(--panel-strong);
+            cursor: pointer;
+            transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+        }
+
+        .option-choice:hover {
+            border-color: rgba(239, 216, 162, 0.65);
+        }
+
+        .option-choice.selected {
+            border-color: var(--gold);
+            color: #24100f;
+            background: var(--gold);
+        }
+
+        .option-choice input {
+            flex: 0 0 auto;
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            accent-color: #7a1e2d;
+        }
+
+        .option-choice span {
+            line-height: 1.5;
+        }
+
+        .search-row {
+            display: flex;
             align-items: end;
             gap: 12px;
-            margin-bottom: 18px;
+            padding: 18px;
+            border: 1px solid rgba(255, 216, 136, 0.16);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.12);
         }
 
-        label {
+        .phone-field {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .phone-field label {
             display: block;
-            margin-bottom: 7px;
+            margin-bottom: 8px;
             color: var(--gold);
             font-size: 13px;
             font-weight: 700;
         }
 
-        input {
-            width: min(100%, 360px);
+        .phone-field input {
+            display: block;
+            width: 100%;
+            min-height: 48px;
             padding: 12px 14px;
             border: 1px solid var(--border);
-            border-radius: 9px;
+            border-radius: 10px;
+            outline: none;
             color: var(--ivory);
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.22);
             font: inherit;
         }
 
-        input::placeholder {
-            color: rgba(255,244,226,0.5);
+        .phone-field input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(239, 216, 162, 0.12);
+        }
+
+        .phone-field input::placeholder {
+            color: rgba(255, 244, 226, 0.48);
         }
 
         button, .back-link {
-            display: inline-block;
-            padding: 12px 16px;
-            border: 1px solid rgba(240,215,158,0.45);
-            border-radius: 9px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 11px 18px;
+            border: 1px solid rgba(240, 215, 158, 0.45);
+            border-radius: 10px;
             color: #24100f;
             background: var(--gold);
             font: inherit;
             font-weight: 700;
             text-decoration: none;
             cursor: pointer;
+            transition: background 160ms ease, transform 160ms ease;
         }
 
         button:hover, .back-link:hover {
             background: var(--ivory);
         }
 
-        .back-link {
-            margin-top: 18px;
+        button:active, .back-link:active {
+            transform: translateY(1px);
+        }
+
+        button.secondary {
+            color: var(--ivory);
+            background: transparent;
+        }
+
+        button.secondary:hover {
+            color: #24100f;
+            background: var(--gold);
+        }
+
+        .results {
+            margin-top: 28px;
+        }
+
+        .results-heading {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px 16px;
+            margin-bottom: 12px;
+        }
+
+        .results-heading h2 {
+            margin: 0;
+            font-size: 17px;
         }
 
         #status {
-            min-height: 24px;
-            margin: 8px 0 12px;
+            min-height: 21px;
+            margin: 0;
             color: var(--muted);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .table-wrap {
             overflow-x: auto;
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 13px;
+            background: rgba(0, 0, 0, 0.08);
         }
 
         table {
@@ -139,186 +255,267 @@
         }
 
         th, td {
-            padding: 13px 15px;
-            border-bottom: 1px solid rgba(255,216,136,0.16);
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 216, 136, 0.15);
         }
 
         th {
             color: var(--gold);
-            background: rgba(0,0,0,0.16);
+            background: rgba(0, 0, 0, 0.15);
+            font-size: 14px;
             white-space: nowrap;
         }
 
-        tr:last-child td {
+        td {
+            color: var(--ivory);
+        }
+
+        tbody tr:last-child td {
             border-bottom: 0;
         }
 
-        @media (max-width: 600px) {
-            .card {
-                padding: 18px 14px;
+        .page-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-link {
+            min-height: 44px;
+            padding: 10px 16px;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 22px 12px;
+            }
+
+            .option-select {
+                grid-template-columns: 1fr;
+            }
+
+            .search-row {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .search-row button {
+                width: 100%;
             }
 
             th, td {
-                padding: 11px 10px;
+                padding: 12px 10px;
+            }
+
+            th {
+                font-size: 12px;
+            }
+
+            td {
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
     <main>
-        <header>
+        <header class="page-header">
+            <p class="eyebrow">ജപ സമർപ്പണം</p>
             <h1>ജപ സമർപ്പണ വിവരങ്ങൾ</h1>
             <p class="description">
-                ആദ്യത്തെ അഞ്ച് പ്രതികരണങ്ങൾ ഇവിടെ കാണാം. കൂടുതൽ വിവരങ്ങൾ കാണാൻ ഫോൺ നമ്പർ നൽകുക.
+                ആദ്യത്തെ അഞ്ച് പ്രതികരണങ്ങൾ കാണാം. കൂടുതൽ വിവരങ്ങൾക്കായി
+                ജപം തിരഞ്ഞെടുക്കുക, ഫോൺ നമ്പർ നൽകി തിരയുക.
             </p>
         </header>
 
-        <section class="card">
-            <form class="toolbar" id="search-form">
-                <div>
-                    <label for="phone">Phone Number</label>
-                    <input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        inputmode="tel"
-                        autocomplete="tel"
-                        placeholder="Enter phone number"
-                    >
+        <section class="card" aria-label="ജപ സമർപ്പണ വിവരങ്ങൾ">
+            <form id="search-form">
+                <fieldset class="option-select">
+                    <legend>Select japam</legend>
+
+                    <label class="option-choice selected">
+                        <input type="radio" name="japamType" value="gayathri" checked>
+                        <span>ഗായത്രി ജപം (Gayathri Manthra Japam)</span>
+                    </label>
+
+                    <label class="option-choice">
+                        <input type="radio" name="japamType" value="ashtakshara">
+                        <span>അഷ്ടാക്ഷര ജപം (Ashtakashara Japam)</span>
+                    </label>
+                </fieldset>
+
+                <div class="search-row">
+                    <div class="phone-field">
+                        <label for="phone">Phone Number</label>
+                        <input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            inputmode="tel"
+                            autocomplete="tel"
+                            placeholder="Enter phone number"
+                        >
+                    </div>
+                    <button type="submit">Search</button>
+                    <button type="button" class="secondary" id="show-top">Clear</button>
                 </div>
-                <button type="submit">Search</button>
-                <button type="button" id="show-top">Show first 5</button>
             </form>
 
-            <p id="status" role="status" aria-live="polite">Loading responses...</p>
+            <section class="results" aria-labelledby="results-title">
+                <div class="results-heading">
+                    <h2 id="results-title">സമർപ്പണ വിവരങ്ങൾ</h2>
+                    <p id="status" role="status" aria-live="polite">Loading responses...</p>
+                </div>
 
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Phone Number</th>
-                            <th>ആരാണ് ചൊല്ലുന്നത് ?</th>
-                            <th>സംഖ്യ</th>
-                        </tr>
-                    </thead>
-                    <tbody id="response-rows"></tbody>
-                </table>
-            </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phone Number</th>
+                                <th>ആരാണ് ചൊല്ലുന്നത് ?</th>
+                                <th>സംഖ്യ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="response-rows"></tbody>
+                    </table>
+                </div>
+            </section>
 
-            <a class="back-link" href="index.html">Back to Home</a>
+            <footer class="page-footer">
+                <a class="back-link" href="index.html">Back to Home</a>
+            </footer>
         </section>
     </main>
 
     <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbzMCZULJZ8E3vO_Jc8KEC0Ak0snpjNQ7l_4HSNgNZGf888MWjRJ88r_qBFDguPqmkTU/exec";
+        const API_URL = "https://script.google.com/macros/s/AKfycbwVH4bXQSfb6CQe26G-GlBeEN6gzzi5MiRe6xMaMMnhsKULcqhIQ1frRd8WUl0DGYvp/exec";
 
-    const statusElement = document.getElementById("status");
-    const rowsElement = document.getElementById("response-rows");
-    const phoneInput = document.getElementById("phone");
+        const statusElement = document.getElementById("status");
+        const rowsElement = document.getElementById("response-rows");
+        const phoneInput = document.getElementById("phone");
 
-    let requestNumber = 0;
+        let requestNumber = 0;
+        let selectedType = document.querySelector(
+            'input[name="japamType"]:checked'
+        ).value;
 
-    function renderResponses(result) {
-        rowsElement.replaceChildren();
+        function renderResponses(result) {
+            rowsElement.replaceChildren();
 
-        if (!result || !result.success) {
-            statusElement.textContent =
-                result && result.message
-                    ? result.message
-                    : "Could not load responses.";
-            return;
-        }
+            if (!result || !result.success) {
+                statusElement.textContent =
+                    result && result.message
+                        ? result.message
+                        : "Could not load responses.";
+                return;
+            }
 
-        if (!Array.isArray(result.data) || result.data.length === 0) {
-            statusElement.textContent = "No matching responses found.";
-            return;
-        }
+            if (!Array.isArray(result.data) || result.data.length === 0) {
+                statusElement.textContent = "No matching responses found.";
+                return;
+            }
 
-        result.data.forEach((item) => {
-            const row = document.createElement("tr");
+            result.data.forEach((item) => {
+                const row = document.createElement("tr");
 
-            [item.phone, item.name, item.count].forEach((value) => {
-                const cell = document.createElement("td");
-                cell.textContent = value == null ? "" : String(value);
-                row.appendChild(cell);
+                [item.phone, item.name, item.count].forEach((value) => {
+                    const cell = document.createElement("td");
+                    cell.textContent = value == null ? "" : String(value);
+                    row.appendChild(cell);
+                });
+
+                rowsElement.appendChild(row);
             });
 
-            rowsElement.appendChild(row);
-        });
-
-        statusElement.textContent = result.filtered
-            ? `${result.data.length} matching response(s).`
-            : "Showing the first five responses.";
-    }
-
-    function loadResponses(phone = "") {
-        statusElement.textContent = "Loading responses...";
-        rowsElement.replaceChildren();
-
-        const callbackName = `handleResponses${++requestNumber}`;
-        const params = new URLSearchParams({
-            action: "responses",
-            callback: callbackName
-        });
-
-        if (phone) {
-            params.set("phone", phone);
+            statusElement.textContent = result.filtered
+                ? `${result.data.length} matching response(s).`
+                : "Showing the first five responses.";
         }
 
-        const script = document.createElement("script");
-        let finished = false;
+        function loadResponses(phone = "") {
+            statusElement.textContent = "Loading responses...";
+            rowsElement.replaceChildren();
 
-        const cleanup = () => {
-            script.remove();
-            delete window[callbackName];
-        };
+            const callbackName = `handleResponses${++requestNumber}`;
+            const params = new URLSearchParams({
+                action: "responses",
+                type: selectedType,
+                callback: callbackName
+            });
 
-        window[callbackName] = (result) => {
-            if (finished) return;
-            finished = true;
-            renderResponses(result);
-            cleanup();
-        };
+            if (phone) {
+                params.set("phone", phone);
+            }
 
-        script.onerror = () => {
-            if (finished) return;
-            finished = true;
-            statusElement.textContent =
-                "Could not connect to the responses service. Check the Apps Script deployment and access settings.";
-            cleanup();
-        };
+            const script = document.createElement("script");
+            let finished = false;
 
-        script.src = `${API_URL}?${params.toString()}`;
-        document.body.appendChild(script);
+            const cleanup = () => {
+                script.remove();
+                delete window[callbackName];
+            };
 
-        window.setTimeout(() => {
-            if (finished) return;
-            finished = true;
-            statusElement.textContent =
-                "The responses service did not return data. Check that the deployed script supports action=responses.";
-            cleanup();
-        }, 15000);
-    }
+            window[callbackName] = (result) => {
+                if (finished) return;
+                finished = true;
+                renderResponses(result);
+                cleanup();
+            };
 
-    document.getElementById("search-form").addEventListener("submit", (event) => {
-        event.preventDefault();
+            script.onerror = () => {
+                if (finished) return;
+                finished = true;
+                statusElement.textContent =
+                    "Could not connect to the responses service. Check the Apps Script deployment and access settings.";
+                cleanup();
+            };
 
-        const phone = phoneInput.value.trim();
-        if (!phone) {
-            statusElement.textContent = "Enter a phone number to search.";
-            phoneInput.focus();
-            return;
+            script.src = `${API_URL}?${params.toString()}`;
+            document.body.appendChild(script);
+
+            window.setTimeout(() => {
+                if (finished) return;
+                finished = true;
+                statusElement.textContent =
+                    "The responses service did not return data. Check the Apps Script deployment and response sheet settings.";
+                cleanup();
+            }, 15000);
         }
 
-        loadResponses(phone);
-    });
+        document.getElementById("search-form").addEventListener("submit", (event) => {
+            event.preventDefault();
 
-    document.getElementById("show-top").addEventListener("click", () => {
-        phoneInput.value = "";
+            const phone = phoneInput.value.trim();
+            if (!phone) {
+                statusElement.textContent = "Enter a phone number to search.";
+                phoneInput.focus();
+                return;
+            }
+
+            loadResponses(phone);
+        });
+
+        document.getElementById("show-top").addEventListener("click", () => {
+            phoneInput.value = "";
+            loadResponses();
+        });
+
+        document.querySelectorAll('input[name="japamType"]').forEach((radio) => {
+            radio.addEventListener("change", () => {
+                selectedType = radio.value;
+                phoneInput.value = "";
+
+                document.querySelectorAll(".option-choice").forEach((choice) => {
+                    choice.classList.toggle(
+                        "selected",
+                        choice.querySelector("input").checked
+                    );
+                });
+
+                loadResponses();
+            });
+        });
+
         loadResponses();
-    });
-
-    loadResponses();
-</script>
+    </script>
 </body>
 </html>
