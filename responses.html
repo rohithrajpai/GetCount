@@ -273,6 +273,14 @@
         tbody tr:last-child td {
             border-bottom: 0;
         }
+		
+		.footer{
+            margin-top:24px;
+            text-align:center;
+            color:rgba(255,246,234,0.38);
+            font-size:11px;
+            letter-spacing:0.2px;
+        }
 
         .page-footer {
             margin-top: 20px;
@@ -283,7 +291,21 @@
             min-height: 44px;
             padding: 10px 16px;
         }
+		
+		.header-logos {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 0 auto 14px;
+		}
 
+		.header-logo-center {
+			display: block;
+			width: 92px;
+			height: 92px;
+			object-fit: contain;
+			border-radius: 50%;
+		}
         @media (max-width: 640px) {
             body {
                 padding: 22px 12px;
@@ -319,11 +341,16 @@
 <body>
     <main>
         <header class="page-header">
-            <p class="eyebrow">ജപ സമർപ്പണം</p>
-            <h1>ജപ സമർപ്പണ വിവരങ്ങൾ</h1>
+		<div class="header-logos">
+				
+				<img class="header-logo-center" src="narayana-devar.jpeg" alt="Narayana Devar">
+				
+			</div>
+            <p class="eyebrow">ഓം നമോ നാരായണായ</p>
+            <h1>അഷ്ടാക്ഷര, ലക്ഷഗായത്രി ജപയജ്ഞം</h1>
+            <h2>കാരണക്കോടം</h2>
             <p class="description">
-                ആദ്യത്തെ അഞ്ച് പ്രതികരണങ്ങൾ കാണാം. കൂടുതൽ വിവരങ്ങൾക്കായി
-                ജപം തിരഞ്ഞെടുക്കുക, ഫോൺ നമ്പർ നൽകി തിരയുക.
+                കൂടുതൽ വിവരങ്ങൾക്കായി ജപം തിരഞ്ഞെടുക്കുക, ഫോൺ നമ്പർ നൽകി തിരയുക.
             </p>
         </header>
 
@@ -385,7 +412,9 @@
             </footer>
         </section>
     </main>
-
+	<footer class="footer">
+            ॐ नमो नारायणाय
+        </footer>
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbwVH4bXQSfb6CQe26G-GlBeEN6gzzi5MiRe6xMaMMnhsKULcqhIQ1frRd8WUl0DGYvp/exec";
 
@@ -428,7 +457,7 @@
 
             statusElement.textContent = result.filtered
                 ? `${result.data.length} matching response(s).`
-                : "Showing the first five responses.";
+                : "LeaderBoard";
         }
 
         function loadResponses(phone = "") {
