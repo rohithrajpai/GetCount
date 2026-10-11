@@ -551,6 +551,108 @@
 		.date-card-heading .date-value {
 			margin-bottom: 0;
 		}
+		
+		.responses-section {
+			margin: 0 0 24px;
+		}
+
+		.responses-card {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			padding: 22px 26px;
+			border: 1px solid rgba(255, 216, 136, 0.42);
+			border-radius: 20px;
+			color: var(--ivory);
+			text-decoration: none;
+			background:
+				radial-gradient(circle at 90% 50%, rgba(217, 183, 115, 0.2), transparent 30%),
+				linear-gradient(135deg, rgba(122, 30, 45, 0.8), rgba(255, 255, 255, 0.045));
+			box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+			transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+		}
+
+		.responses-card:hover {
+			transform: translateY(-3px);
+			border-color: var(--gold-soft);
+			box-shadow: 0 22px 46px rgba(0, 0, 0, 0.28);
+		}
+
+		.responses-card:focus-visible {
+			outline: 3px solid var(--gold-soft);
+			outline-offset: 4px;
+		}
+
+		.responses-icon {
+			display: grid;
+			flex: 0 0 54px;
+			width: 54px;
+			height: 54px;
+			place-items: center;
+			border: 1px solid rgba(239, 216, 162, 0.45);
+			border-radius: 16px;
+			color: var(--gold-soft);
+			background: rgba(239, 216, 162, 0.1);
+			font-size: 26px;
+		}
+
+		.responses-copy {
+			flex: 1;
+		}
+
+		.responses-title {
+			color: var(--gold-soft);
+			font-size: 18px;
+			font-weight: 700;
+		}
+
+		.responses-description {
+			margin-top: 5px;
+			color: var(--muted);
+			font-size: 13px;
+			line-height: 1.6;
+		}
+
+		.responses-action {
+			display: inline-flex;
+			align-items: center;
+			gap: 9px;
+			padding: 11px 16px;
+			border-radius: 10px;
+			color: #24100f;
+			background: var(--gold-soft);
+			font-size: 13px;
+			font-weight: 700;
+			white-space: nowrap;
+		}
+
+		.responses-arrow {
+			font-size: 18px;
+			transition: transform 0.2s ease;
+		}
+
+		.responses-card:hover .responses-arrow {
+			transform: translateX(4px);
+		}
+
+		@media (max-width: 600px) {
+			.responses-card {
+				align-items: flex-start;
+				gap: 14px;
+				padding: 18px;
+			}
+
+			.responses-icon {
+				flex-basis: 46px;
+				width: 46px;
+				height: 46px;
+			}
+
+			.responses-action {
+				align-self: center;
+				padding: 10px 12px;
+			}
+		}
     </style>
 </head>
 <body>
@@ -564,6 +666,7 @@
 			</div>
             <div class="small">ഓം നമോ നാരായണായ</div>
             <h1>അഷ്ടാക്ഷര, ലക്ഷഗായത്രി ജപയജ്ഞം</h1>
+			<h2>കാരണക്കോടം</h2>
             <p class="description">
                 ഗ്രാമദേവനായ നാരായണ ദേവരുടെ 500-ാം  പൗർണ്ണമി സത്യനാരായണ പൂജ ദിനത്തിൽ (26/09/2026)
                 സമാരംഭം കുറിച്ച്  സത്യനാരായണ പൂജ തുടങ്ങി 41 വർഷം തികയുന്ന വൈശാഖ പൗർണ്ണമിക്ക് (06/05/2027) പരിസമാപ്തി കുറിക്കുന്നു.
@@ -608,14 +711,26 @@
                     </svg>
                     Click Here
                 </a>
-            </div>
-			<div class="registration-item">
-				<div class="registration-title">ജപ സമർപ്പണ വിവരങ്ങൾ</div>
-				<a class="registration-link" href="responses.html">
-					View Responses
-				</a>
-			</div>
+            </div>			
         </section>
+		</section> <!-- end of registration-card -->
+
+		<section class="responses-section" aria-label="ജപ സമർപ്പണ വിവരങ്ങൾ">
+			<a class="responses-card" href="responses.html">
+				<span class="responses-icon" aria-hidden="true">ॐ</span>
+
+				<span class="responses-copy">
+					<span class="responses-title">ജപസംഖ്യ സമർപ്പണ വിവരങ്ങൾ</span>
+					<span class="responses-description">
+					</span>
+				</span>
+
+				<span class="responses-action">
+					View Responses
+					<span class="responses-arrow" aria-hidden="true">→</span>
+				</span>
+			</a>
+		</section>
 
         <section class="details-card">
             <div class="toolbar">
