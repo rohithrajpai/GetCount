@@ -696,6 +696,67 @@
 				font-size: 14px;
 			}
 		}
+
+		.responses-panel {
+		    padding: 22px 26px;
+		    border: 1px solid rgba(255, 216, 136, 0.42);
+		    border-radius: 20px;
+		    background:
+		        radial-gradient(circle at 90% 50%, rgba(217, 183, 115, 0.2), transparent 30%),
+		        linear-gradient(135deg, rgba(122, 30, 45, 0.8), rgba(255, 255, 255, 0.045));
+		    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+		}
+		
+		.responses-heading {
+		    display: flex;
+		    align-items: center;
+		    gap: 16px;
+		    margin-bottom: 20px;
+		}
+		
+		.responses-heading .responses-title {
+		    margin: 0;
+		}
+		
+		.responses-links {
+		    display: flex;
+		    gap: 12px;
+		}
+		
+		.responses-link {
+		    display: inline-flex;
+		    align-items: center;
+		    justify-content: center;
+		    gap: 9px;
+		    min-width: 140px;
+		    padding: 12px 18px;
+		    border-radius: 10px;
+		    color: #24100f;
+		    background: var(--gold-soft);
+		    font-size: 14px;
+		    font-weight: 700;
+		    text-decoration: none;
+		}
+		
+		.responses-link:hover {
+		    background: var(--gold);
+		}
+		
+		.responses-link:focus-visible {
+		    outline: 3px solid var(--gold-soft);
+		    outline-offset: 4px;
+		}
+		
+		@media (max-width: 760px) {
+		    .responses-links {
+		        flex-direction: column;
+		    }
+		
+		    .responses-link {
+		        width: 100%;
+		        min-height: 48px;
+		    }
+		}
     </style>
 </head>
 <body>
@@ -758,29 +819,22 @@
         </section>
 		</section> <!-- end of registration-card -->
 
-		<section class="responses-section" aria-label="ജപ സമർപ്പണ വിവരങ്ങൾ">
-			<a class="responses-card" href="responses.html">
-				<span class="responses-icon" aria-hidden="true">ॐ</span>
-
-				<span class="responses-copy">
-					<span class="responses-title">ജപസംഖ്യ വിവരങ്ങൾ</span>
-					<span class="responses-description">
-					</span>
-				</span>
-
-				<span class="responses-action">
-					Admin
-					<span class="responses-arrow" aria-hidden="true">→</span>
-				</span>
-			</a>
-			<a class="responses-card" href="user_responses.html">
-				
-
-				<span class="responses-action">
-					User
-					<span class="responses-arrow" aria-hidden="true">→</span>
-				</span>
-			</a>
+		<section class="responses-section" aria-labelledby="responses-title">
+		    <div class="responses-panel">
+		        <div class="responses-heading">
+		            <span class="responses-icon" aria-hidden="true">ॐ</span>
+		            <h2 class="responses-title" id="responses-title">ജപസംഖ്യ വിവരങ്ങൾ</h2>
+		        </div>
+		
+		        <div class="responses-links">
+		            <a class="responses-link" href="responses.html">
+		                Admin <span aria-hidden="true">→</span>
+		            </a>
+		            <a class="responses-link" href="user_responses.html">
+		                User <span aria-hidden="true">→</span>
+		            </a>
+		        </div>
+		    </div>
 		</section>
 
         <section class="details-card">
