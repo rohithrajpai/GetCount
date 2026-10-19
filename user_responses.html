@@ -525,6 +525,7 @@
 
 			<form id="submit-count-form" method="post" target="submit-result-frame">
 				<input type="hidden" name="action" value="submitJapam">
+				<input type="hidden" id="client-token" name="clientToken">
 
 				<div class="submit-grid">
 					<div class="submit-field">
@@ -564,11 +565,11 @@
 				<fieldset class="submit-options">
 					<legend>Gayathri / Ashthakshara Japam</legend>
 					<label class="submit-option">
-						<input type="radio" name="japamType" value="Gayathri Japam" required>
+						<input type="radio" name="japamType" value="ഗായത്രി ജപം (Gayathri Manthra Japam)" required>
 						<span>ഗായത്രി ജപം (Gayathri Manthra Japam)</span>
 					</label>
 					<label class="submit-option">
-						<input type="radio" name="japamType" value="Ashthakshara Japam" required>
+						<input type="radio" name="japamType" value="അഷ്ടാക്ഷര ജപം (Ashtakashara Japam)" required>
 						<span>അഷ്ടാക്ഷര ജപം (Ashtakashara Japam)</span>
 					</label>
 				</fieldset> <br><br>
@@ -611,7 +612,7 @@
                 <div class="table-wrap">
                     <table>
                         <thead>
-                            <tr><th>Phone Number</th><th>ആരാണ് ചൊല്ലുന്നത്?</th><th>സംഖ്യ</th></tr>
+                            <tr><th>Date of entry</th><th>Phone Number</th><th>ആരാണ് ചൊല്ലുന്നത്?</th><th>സംഖ്യ</th></tr>
                         </thead>
                         <tbody id="response-rows"></tbody>
                     </table>
@@ -692,7 +693,7 @@
 
     <script>
         const REGISTRATION_API_URL = "https://script.google.com/macros/s/AKfycbx4tdKW86L0raWPsjEI__fbLqsMFVQOEHfbyEsKcVfSNM4G0GfS_gCFqs9VlXqqy0tQVg/exec";
-        const COUNT_API_URL = "https://script.google.com/macros/s/AKfycbwnvZWAK2_WyXltyTCGoOwIKA2lUQoPc9o0ScsyLHwy0HHAtRBMIM1LIPvm-wNXPG54/exec";
+        const COUNT_API_URL = "https://script.google.com/macros/s/AKfycbzOeYn6Sqah6KgkWNu6XLggaBYfRNZtouvF6tC8b8vaMLMAugW9SN0-VyUpn8ZT7LG_/exec";
 
         const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
         const panels = tabs.map((tab) => document.getElementById(tab.getAttribute("aria-controls")));
@@ -775,7 +776,7 @@
 
             result.data.forEach((item) => {
                 const row = document.createElement("tr");
-                [item.phone, item.name, item.count].forEach((value) => {
+                [item.date, item.phone, item.name, item.count].forEach((value) => {
                     const cell = document.createElement("td");
                     cell.textContent = value == null ? "" : String(value);
                     row.appendChild(cell);
@@ -878,7 +879,20 @@
 		const submitForm = document.getElementById("submit-count-form");
 		const submitStatus = document.getElementById("submit-status");
 		const submitButton = document.getElementById("submit-count-button");
-		const resultFrame = document.getElementById("submit-result-frame");
+		let pendingSubmissionToken = "";
+		let submissionTimeout = 0;
+		
+		submitForm.action = COUNT_API_URL;
+
+		function createSubmissionToken() {
+			if (window.crypto && typeof window.crypto.randomUUID === "function") {
+				return window.crypto.randomUUID();
+			}
+			const randomValues = new Uint32Array(4);
+			window.crypto.getRandomValues(randomValues);
+			return Array.from(randomValues, (value) => value.toString(16)).join("-");
+		}
+
 
 		function localDateString() {
 			const now = new Date();
@@ -889,12 +903,16 @@
 		document.getElementById("entry-date").value = localDateString();
 
 		submitForm.addEventListener("submit", () => {
+			pendingSubmissionToken = createSubmissionToken();
+			document.getElementById("client-token").value = pendingSubmissionToken;
 			submitButton.disabled = true;
 			submitStatus.textContent = "Submitting…";
+			window.clearTimeout(submissionTimeout);
 
-			window.setTimeout(() => {
+			submissionTimeout = window.setTimeout(() => {
 				if (submitButton.disabled) {
 					submitButton.disabled = false;
+					pendingSubmissionToken = "";
 					submitStatus.textContent =
 						"No confirmation received. Please check your connection and try again.";
 				}
@@ -902,9 +920,12 @@
 		});
 
 		window.addEventListener("message", (event) => {
-			if (event.source !== resultFrame.contentWindow) return;
 			if (!event.data || event.data.source !== "japam-submit") return;
+			if (!pendingSubmissionToken ||
+				event.data.clientToken !== pendingSubmissionToken) return;
 
+			window.clearTimeout(submissionTimeout);
+			pendingSubmissionToken = "";
 			submitButton.disabled = false;
 
 			if (event.data.success) {
@@ -912,9 +933,22 @@
 				submitForm.reset();
 				document.getElementById("entry-date").value = localDateString();
 			} else {
-				submitStatus.textContent = "Could not submit. Please check the details and try again.";
+				submitStatus.textContent = event.data.message || "Could not submit.";
 			}
 		});
+		
+		const dateInput = document.getElementById("entry-date");
+
+		  dateInput.addEventListener("change", function() {
+			const selectedDate = new Date(this.value);
+			const formattedDate = 
+			  (selectedDate.getMonth() + 1).toString().padStart(2, '0') + "/" +
+			  selectedDate.getDate().toString().padStart(2, '0') + "/" +
+			  selectedDate.getFullYear();
+			
+			console.log("Formatted Date:", formattedDate); 
+			// Example output: 10/19/2026
+		  });
     </script>
 </body>
 </html>
